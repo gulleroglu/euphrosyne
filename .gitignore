@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+.next/
+.nuxt/
+dist/
+build/
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.venv/
+.pytest_cache/
+coverage/
+
+# Editors/IDE
+.idea/
+.vscode/
+*.swp
+
+# Misc
+*.log
+*.local
+.env.*.local
