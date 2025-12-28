@@ -1,6 +1,6 @@
 ---
 name: activities
-description: "Build exhaustive masterlist of activities for an occasion. Uses google-maps skill to find ALL restaurants, attractions, and points of interest."
+description: "Build exhaustive masterlist of activities for an occasion. Uses google-maps skill to find ALL restaurants, attractions, and points of interest. Outputs to both content (raw) and context (curated) folders."
 tools: Read, Write, Edit, Bash, Skill
 ---
 
@@ -17,7 +17,8 @@ Build a comprehensive list of every activity option available, across multiple c
 1. **Search All Categories**: Cover restaurants, cafes, attractions, museums, etc.
 2. **No Filtering**: Include ALL places regardless of price or rating
 3. **Occasion Context**: Use the description to find relevant venues
-4. **Document Everything**: Write all results to files/content/activities/
+4. **Write Raw Results**: Save API outputs to `files/content/activities/`
+5. **Write Curated List**: Save deduplicated list to `files/context/activities.json`
 
 ## Workflow
 
@@ -141,31 +142,85 @@ python3 .claude/skills/google-maps/scripts/search_places.py \
   --output "files/content/activities/casinos.json"
 ```
 
-### Step 6: Count Results
+### Step 6: Create Curated Context File
 
-Tally the total number of activities found across all categories:
-- Count from each category file
-- Note which categories have the most results
+**CRITICAL**: You MUST write a curated list to `files/context/activities.json`.
 
-### Step 7: Invoke Orchestrating Workflow
+1. Read all JSON files from `files/content/activities/`
+2. Merge into a single list
+3. Deduplicate by `id` field
+4. Validate each item has required fields: `id`, `source`, `name`
+5. Write to `files/context/activities.json`
+
+```python
+# Pseudocode for creating context file
+all_activities = []
+
+# Read each content file
+for file in content/activities/*.json:
+    data = read_json(file)
+    all_activities.extend(data)
+
+# Deduplicate by id
+seen_ids = set()
+curated = []
+for item in all_activities:
+    if item["id"] not in seen_ids:
+        seen_ids.add(item["id"])
+        curated.append(item)
+
+# Write to context
+write_json("files/context/activities.json", curated)
+```
+
+### Step 7: Count and Report Results
+
+Count the total number of unique activities in the context file.
+
+### Step 8: Invoke Orchestrating Workflow
 
 When finished, invoke the orchestrating-workflow skill:
 
 ```
 Use Skill tool to invoke 'orchestrating-workflow' with message:
-'Activities research complete. Found [TOTAL] activities across [N] categories.
-Categories: restaurants ([X]), attractions ([Y]), museums ([Z]), etc.
-Written to files/content/activities/'
+'Activities research complete. Found [TOTAL] activities.'
 ```
 
-## Output Format
+**IMPORTANT**: The count you report MUST match the number of items in `files/context/activities.json`.
 
-All results are written as JSON files in **flat list format**:
+## Output Structure
+
+### Content Files (Raw API Outputs)
+
+```
+files/content/activities/
+├── restaurants.json        # Raw Google Maps response
+├── cafes.json              # Raw Google Maps response
+├── bars.json               # Raw Google Maps response
+├── attractions.json        # Raw Google Maps response
+├── museums.json            # Raw Google Maps response
+├── galleries.json          # Raw Google Maps response
+├── parks.json              # Raw Google Maps response
+├── spas.json               # Raw Google Maps response
+├── shopping.json           # Raw Google Maps response
+└── occasion_specific.json  # Context-relevant places
+```
+
+### Context File (Curated List)
+
+```
+files/context/
+└── activities.json         # Deduplicated, validated array
+```
+
+## Context File Format (REQUIRED)
+
+The context file MUST be a JSON array with these fields:
 
 ```json
 [
   {
-    "id": "place_xyz789",
+    "id": "ChIJ...",
     "source": "google_maps",
     "name": "Café de Paris Monte-Carlo",
     "category": "restaurant",
@@ -177,9 +232,13 @@ All results are written as JSON files in **flat list format**:
     "price_level": 3,
     "types": ["restaurant", "cafe", "food"],
     "occasion_relevance": null
-  }
+  },
+  ...
 ]
 ```
+
+**Required fields**: `id`, `source`, `name`
+**Optional fields**: category, rating, rating_count, address, latitude, longitude, price_level, types, occasion_relevance
 
 ## Key Principles
 
@@ -187,8 +246,18 @@ All results are written as JSON files in **flat list format**:
 2. **Multiple Categories**: Cover dining, attractions, leisure, and occasion-specific
 3. **Use Occasion Description**: Understand context for relevant searches
 4. **No Price Filtering**: This is a masterlist, not a selection
-5. **Flat List Format**: Simple array tagged with source and category
+5. **MUST Write Context File**: `files/context/activities.json` is validated by orchestrator
 
 ## Skills Available
 
 - **google-maps**: Place search via Google Maps API
+
+## Validation Checklist
+
+Before invoking orchestrating-workflow, verify:
+
+- [ ] Raw files written to `files/content/activities/`
+- [ ] Curated list written to `files/context/activities.json`
+- [ ] Context file is a JSON array `[...]`
+- [ ] Each item has `id`, `source`, `name` fields
+- [ ] Count matches what you report to orchestrator

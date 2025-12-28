@@ -1,6 +1,6 @@
 ---
 name: accommodation
-description: "Build exhaustive masterlist of accommodations for an occasion. Uses duffel and google-maps skills to find ALL hotels."
+description: "Build exhaustive masterlist of accommodations for an occasion. Uses duffel and google-maps skills to find ALL hotels. Outputs to both content (raw) and context (curated) folders."
 tools: Read, Write, Edit, Bash, Skill
 ---
 
@@ -17,7 +17,8 @@ Build a comprehensive list of every hotel/accommodation option available, regard
 1. **Search All Sources**: Use both `duffel` and `google-maps` skills
 2. **No Filtering**: Include ALL hotels regardless of price, rating, or availability
 3. **Multiple Searches**: Cover the entire area with adequate search radius
-4. **Document Everything**: Write all results to files/content/accommodations/
+4. **Write Raw Results**: Save API outputs to `files/content/accommodations/`
+5. **Write Curated List**: Save deduplicated list to `files/context/accommodations.json`
 
 ## Workflow
 
@@ -70,26 +71,73 @@ python3 .claude/skills/google-maps/scripts/search_places.py \
   --output "files/content/accommodations/google_resorts.json"
 ```
 
-### Step 4: Count Results
+### Step 4: Create Curated Context File
 
-Tally the total number of unique accommodations found:
-- Count from duffel_hotels.json
-- Count from google_hotels.json
-- Count from google_resorts.json
+**CRITICAL**: You MUST write a curated list to `files/context/accommodations.json`.
 
-### Step 5: Invoke Orchestrating Workflow
+1. Read all JSON files from `files/content/accommodations/`
+2. Merge into a single list
+3. Deduplicate by `id` field
+4. Validate each item has required fields: `id`, `source`, `name`
+5. Write to `files/context/accommodations.json`
+
+```python
+# Pseudocode for creating context file
+all_accommodations = []
+
+# Read each content file
+for file in content/accommodations/*.json:
+    data = read_json(file)
+    all_accommodations.extend(data)
+
+# Deduplicate by id
+seen_ids = set()
+curated = []
+for item in all_accommodations:
+    if item["id"] not in seen_ids:
+        seen_ids.add(item["id"])
+        curated.append(item)
+
+# Write to context
+write_json("files/context/accommodations.json", curated)
+```
+
+### Step 5: Count and Report Results
+
+Count the total number of unique accommodations in the context file.
+
+### Step 6: Invoke Orchestrating Workflow
 
 When finished, invoke the orchestrating-workflow skill to proceed to the next step:
 
 ```
 Use Skill tool to invoke 'orchestrating-workflow' with message:
-'Accommodation research complete. Found [X] hotels from duffel and [Y] from google-maps.
-Total: [TOTAL] unique accommodations written to files/content/accommodations/'
+'Accommodation research complete. Found [TOTAL] accommodations.'
 ```
 
-## Output Format
+**IMPORTANT**: The count you report MUST match the number of items in `files/context/accommodations.json`.
 
-All results are written as JSON files in **flat list format**:
+## Output Structure
+
+### Content Files (Raw API Outputs)
+
+```
+files/content/accommodations/
+├── duffel_hotels.json      # Raw Duffel API response
+├── google_hotels.json      # Raw Google Maps lodging
+└── google_resorts.json     # Raw Google Maps resorts
+```
+
+### Context File (Curated List)
+
+```
+files/context/
+└── accommodations.json     # Deduplicated, validated array
+```
+
+## Context File Format (REQUIRED)
+
+The context file MUST be a JSON array with these fields:
 
 ```json
 [
@@ -105,9 +153,18 @@ All results are written as JSON files in **flat list format**:
     "longitude": 7.4246,
     "amenities": ["pool", "spa", "restaurant"],
     "price_range": null
+  },
+  {
+    "id": "ChIJ...",
+    "source": "google_maps",
+    "name": "Hotel Metropole",
+    ...
   }
 ]
 ```
+
+**Required fields**: `id`, `source`, `name`
+**Optional fields**: stars, rating, rating_count, address, latitude, longitude, amenities, price_range
 
 ## Key Principles
 
@@ -115,9 +172,19 @@ All results are written as JSON files in **flat list format**:
 2. **Multiple Sources**: Use both duffel and google-maps for comprehensive coverage
 3. **Wide Radius**: Use 10-15km radius to capture all properties
 4. **No Price Filtering**: This is a masterlist, not a selection
-5. **Flat List Format**: Simple array tagged with source
+5. **MUST Write Context File**: `files/context/accommodations.json` is validated by orchestrator
 
 ## Skills Available
 
 - **duffel**: Hotel search via Duffel Stays API
 - **google-maps**: Place search via Google Maps API
+
+## Validation Checklist
+
+Before invoking orchestrating-workflow, verify:
+
+- [ ] Raw files written to `files/content/accommodations/`
+- [ ] Curated list written to `files/context/accommodations.json`
+- [ ] Context file is a JSON array `[...]`
+- [ ] Each item has `id`, `source`, `name` fields
+- [ ] Count matches what you report to orchestrator
