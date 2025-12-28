@@ -1,16 +1,17 @@
 ---
 name: google-maps
-description: "Search places, calculate routes, and get directions via Google Maps API. Use for: (1) Activity/POI discovery by location and category, (2) Route planning between points with transit/driving/walking options, (3) Distance and travel time calculations, (4) Place details including hours, reviews, and photos. Essential for activity planning and ground transportation."
+description: "Calculate directions and travel times via Google Maps API for itinerary planning. Use for route planning between locations, travel time calculations, and logistics verification. Essential for the verification subagent when creating day-by-day plans."
 ---
 
-# Google Maps API Integration
+# Google Maps API Integration - Planning Agent
 
 ## Overview
 
-Access location-based services via Google Maps Platform:
-- Places API (nearby search, text search, place details)
+Access location-based services via Google Maps Platform for itinerary planning:
 - Directions API (routes with different travel modes)
 - Distance Matrix API (travel times between multiple points)
+
+**Note**: In the planning agent, place search is NOT used - activities and accommodations come from occasion masterlists. This skill is primarily for the **verification** subagent to calculate travel logistics.
 
 ## Environment Variables Required
 
@@ -18,46 +19,17 @@ Access location-based services via Google Maps Platform:
 
 ## Available Scripts
 
-### 1. Search Places
+### 1. Get Directions
 
-Search for points of interest, restaurants, attractions, etc.
-
-```bash
-python3 .claude/skills/google-maps/scripts/search_places.py \
-  --query "museums in Paris" \
-  --location 48.8566,2.3522 \
-  --radius 5000 \
-  --type museum \
-  --output files/content/activities/paris/museums/
-```
-
-**Parameters:**
-- `--query`: Search query (e.g., "restaurants near Eiffel Tower")
-- `--location`: Center point as latitude,longitude
-- `--radius`: Search radius in meters (max 50000)
-- `--type`: Place type filter (restaurant, museum, tourist_attraction, etc.)
-- `--output`: Output directory for results
-
-**Output:**
-```
-files/content/activities/paris/museums/
-├── search_request.json    # Original request parameters
-├── places.json            # All returned places
-├── top_places.json        # Top 10 by rating
-└── summary.md             # Human-readable summary
-```
-
-### 2. Get Directions
-
-Calculate route between two points.
+Calculate route between two points with detailed steps.
 
 ```bash
 python3 .claude/skills/google-maps/scripts/get_directions.py \
-  --origin "Charles de Gaulle Airport" \
-  --destination "Hotel Le Bristol Paris" \
+  --origin "Nice Airport, France" \
+  --destination "Hotel Hermitage Monte-Carlo" \
   --mode transit \
-  --departure-time 2025-03-15T14:00:00 \
-  --output files/content/routes/cdg_to_hotel/
+  --departure-time 2025-05-23T14:00:00 \
+  --output files/content/verification/routes/
 ```
 
 **Parameters:**
@@ -70,63 +42,176 @@ python3 .claude/skills/google-maps/scripts/get_directions.py \
 
 **Output:**
 ```
-files/content/routes/cdg_to_hotel/
+files/content/verification/routes/airport_to_hotel/
 ├── request.json           # Original request
 ├── routes.json            # All routes with steps
 └── summary.md             # Human-readable directions
 ```
 
-### 3. Distance Matrix
+### 2. Distance Matrix
 
-Calculate travel times between multiple origins and destinations.
+Calculate travel times between multiple origins and destinations - ideal for itinerary optimization.
 
 ```bash
 python3 .claude/skills/google-maps/scripts/distance_matrix.py \
-  --origins "Hotel Le Bristol Paris" \
-  --destinations "Louvre Museum,Eiffel Tower,Notre-Dame" \
+  --origins "Hotel Hermitage Monte-Carlo" \
+  --destinations "Cafe de Paris,Casino Monte-Carlo,Prince's Palace" \
   --mode walking \
-  --output files/content/routes/day_1_distances/
+  --output files/content/verification/distances/
 ```
 
 **Parameters:**
-- `--origins`: One or more origin points (comma-separated)
-- `--destinations`: One or more destination points (comma-separated)
-- `--mode`: Travel mode
+- `--origins`: One or more origin points (comma-separated or JSON array)
+- `--destinations`: One or more destination points (comma-separated or JSON array)
+- `--mode`: Travel mode (driving, walking, transit)
 - `--output`: Output directory for results
 
 **Output:**
 ```
-files/content/routes/day_1_distances/
+files/content/verification/distances/
 ├── request.json           # Original request
 ├── matrix.json            # Distance/duration matrix
 └── summary.md             # Human-readable table
 ```
 
-## Place Types
+## Usage in Verification Subagent
 
-Common place types for travel planning:
-- `tourist_attraction` - General attractions
-- `museum` - Museums and galleries
-- `restaurant` - Restaurants
-- `cafe` - Cafes and coffee shops
-- `bar` - Bars and pubs
-- `park` - Parks and gardens
-- `church` - Churches and religious sites
-- `art_gallery` - Art galleries
-- `shopping_mall` - Shopping centers
-- `spa` - Spas and wellness
-- `gym` - Fitness centers
-- `airport` - Airports
-- `train_station` - Train stations
-- `bus_station` - Bus stations
+The verification subagent uses this skill to:
 
-## Workflow
+### 1. Calculate Airport Transfer Time
+```bash
+python3 .claude/skills/google-maps/scripts/get_directions.py \
+  --origin "[DESTINATION_AIRPORT]" \
+  --destination "[HOTEL_ADDRESS]" \
+  --mode driving \
+  --output files/content/verification/routes/airport_transfer/
+```
 
-1. **Read trip_context.json** to get destination and preferences
-2. **Call search_places.py** for activity discovery
-3. **Call get_directions.py** for transportation routes
-4. **Call distance_matrix.py** for itinerary optimization
-5. **Read summary.md files** to provide recommendations
+### 2. Verify Activity Logistics
+```bash
+python3 .claude/skills/google-maps/scripts/distance_matrix.py \
+  --origins "[HOTEL_ADDRESS]" \
+  --destinations "[ACTIVITY_1_ADDRESS],[ACTIVITY_2_ADDRESS],[ACTIVITY_3_ADDRESS]" \
+  --mode walking \
+  --output files/content/verification/distances/day_activities/
+```
+
+### 3. Check Event Venue Access
+```bash
+python3 .claude/skills/google-maps/scripts/get_directions.py \
+  --origin "[HOTEL_ADDRESS]" \
+  --destination "[EVENT_VENUE]" \
+  --mode transit \
+  --departure-time [EVENT_START_MINUS_1H] \
+  --output files/content/verification/routes/to_venue/
+```
+
+## Results Schema
+
+### Direction Results
+```json
+{
+  "origin": "Nice Airport, France",
+  "destination": "Hotel Hermitage Monte-Carlo",
+  "mode": "transit",
+  "distance": "25 km",
+  "duration": "45 min",
+  "steps": [
+    {
+      "instruction": "Take bus 100 towards Monaco",
+      "distance": "20 km",
+      "duration": "35 min"
+    }
+  ],
+  "alternatives": [
+    {
+      "mode": "taxi",
+      "duration": "30 min",
+      "estimated_cost": "60-80 EUR"
+    }
+  ]
+}
+```
+
+### Distance Matrix Results
+```json
+{
+  "origins": ["Hotel Hermitage Monte-Carlo"],
+  "destinations": ["Cafe de Paris", "Casino Monte-Carlo", "Prince's Palace"],
+  "matrix": [
+    {
+      "destination": "Cafe de Paris",
+      "distance": "0.3 km",
+      "duration": "4 min",
+      "mode": "walking"
+    },
+    {
+      "destination": "Casino Monte-Carlo",
+      "distance": "0.2 km",
+      "duration": "3 min",
+      "mode": "walking"
+    },
+    {
+      "destination": "Prince's Palace",
+      "distance": "1.2 km",
+      "duration": "15 min",
+      "mode": "walking"
+    }
+  ]
+}
+```
+
+## Integration with Day-by-Day Plan
+
+When creating the plan, include travel logistics:
+
+```json
+{
+  "days": [
+    {
+      "date": "2025-05-23",
+      "schedule": [
+        {
+          "time": "12:30",
+          "activity": "Arrive Nice Airport",
+          "type": "travel"
+        },
+        {
+          "time": "13:15",
+          "activity": "Transfer to Monaco",
+          "type": "travel",
+          "duration": "45 min",
+          "mode": "taxi",
+          "notes": "Pre-book recommended"
+        },
+        {
+          "time": "14:00",
+          "activity": "Check-in Hotel Hermitage",
+          "type": "accommodation"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Verification Checklist
+
+Use this skill to verify:
+
+| Check | How |
+|-------|-----|
+| Airport to hotel time | get_directions with flight arrival time |
+| Hotel to venue time | get_directions with event start time |
+| Activities reachable | distance_matrix from hotel |
+| Schedule feasible | Compare travel times with slot durations |
+| Restaurant proximity | distance_matrix for meal locations |
+
+## Error Handling
+
+- If `GOOGLE_MAPS_API_KEY` missing: Script exits with clear error
+- If route not found: Returns error with suggestions
+- If API rate limited: Implements exponential backoff
 
 ## References
 

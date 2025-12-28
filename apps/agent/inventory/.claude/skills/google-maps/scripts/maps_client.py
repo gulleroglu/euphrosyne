@@ -7,7 +7,14 @@ import json
 import time
 import requests
 from typing import Dict, Any, Optional, List
+from pathlib import Path
 from urllib.parse import urlencode
+
+from dotenv import load_dotenv
+
+# Load .env from inventory agent root (5 levels up: scripts -> google-maps -> skills -> .claude -> inventory)
+inventory_root = Path(__file__).parent.parent.parent.parent.parent
+load_dotenv(inventory_root / ".env")
 
 MAPS_BASE_URL = "https://maps.googleapis.com/maps/api"
 

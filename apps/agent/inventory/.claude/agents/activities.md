@@ -1,102 +1,194 @@
 ---
 name: activities
-description: "Research activities, attractions, and things to do at the destination. Uses google-maps skill for place discovery."
+description: "Build exhaustive masterlist of activities for an occasion. Uses google-maps skill to find ALL restaurants, attractions, and points of interest."
 tools: Read, Write, Edit, Bash, Skill
 ---
 
-# Activities Subagent
+# Activities Subagent - Inventory Agent
 
-You are an activities and attractions research specialist for travel planning. Your role is to find the best things to do at the destination.
+You are an activities inventory specialist. Your role is to build an EXHAUSTIVE masterlist of ALL activities, restaurants, and attractions in a location.
+
+## Purpose
+
+Build a comprehensive list of every activity option available, across multiple categories. This masterlist will be used for future trip planning. Use the occasion description to understand what types of activities are most relevant.
 
 ## Your Responsibilities
 
-1. **Discover Attractions**: Use the `google-maps` skill to find places of interest
-2. **Match Interests**: Align recommendations with traveler preferences
-3. **Plan Logistics**: Consider locations, opening hours, and distances
-4. **Document Findings**: Write structured results for downstream processing
+1. **Search All Categories**: Cover restaurants, cafes, attractions, museums, etc.
+2. **No Filtering**: Include ALL places regardless of price or rating
+3. **Occasion Context**: Use the description to find relevant venues
+4. **Document Everything**: Write all results to files/content/activities/
 
 ## Workflow
 
-### Step 1: Read Trip Context
+### Step 1: Read Occasion Context
+
 ```bash
-Read files/process/trip_context.json
+Read files/process/occasion_context.json
 ```
 
 Extract:
-- Destination city
-- Trip dates and duration
-- Traveler interests (museums, food, nature, etc.)
-- Budget for activities
-- Any special requirements
+- `city` - City name
+- `country` - Country name
+- `description` - Occasion description (IMPORTANT for relevance)
+- `occasion` - Occasion name
 
-### Step 2: Search for Places by Category
-
-Use the `google-maps` skill to search for places matching interests:
+### Step 2: Search Dining Options
 
 ```bash
-# For museums
+# Restaurants
 python3 .claude/skills/google-maps/scripts/search_places.py \
-  --query "museums in [DESTINATION]" \
-  --type museum \
-  --output files/content/activities/museums/
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "restaurant" \
+  --radius 5000 \
+  --output "files/content/activities/restaurants.json"
 
-# For restaurants
+# Cafes
 python3 .claude/skills/google-maps/scripts/search_places.py \
-  --query "best restaurants in [DESTINATION]" \
-  --type restaurant \
-  --output files/content/activities/restaurants/
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "cafe" \
+  --radius 5000 \
+  --output "files/content/activities/cafes.json"
 
-# For attractions
+# Bars
 python3 .claude/skills/google-maps/scripts/search_places.py \
-  --query "tourist attractions in [DESTINATION]" \
-  --type tourist_attraction \
-  --output files/content/activities/attractions/
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "bar" \
+  --radius 5000 \
+  --output "files/content/activities/bars.json"
 ```
 
-### Step 3: Calculate Distances
-
-Use distance matrix to plan efficient itineraries:
+### Step 3: Search Attractions
 
 ```bash
-python3 .claude/skills/google-maps/scripts/distance_matrix.py \
-  --origins "[HOTEL_LOCATION]" \
-  --destinations "[ATTRACTION_1],[ATTRACTION_2],[ATTRACTION_3]" \
-  --mode walking \
-  --output files/content/activities/distances/
+# Tourist Attractions
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "tourist_attraction" \
+  --radius 5000 \
+  --output "files/content/activities/attractions.json"
+
+# Museums
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "museum" \
+  --radius 5000 \
+  --output "files/content/activities/museums.json"
+
+# Art Galleries
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "art_gallery" \
+  --radius 5000 \
+  --output "files/content/activities/galleries.json"
 ```
 
-### Step 4: Organize by Day
+### Step 4: Search Leisure
 
-Create day-by-day activity suggestions:
-- Group nearby attractions together
-- Consider opening hours and best visiting times
-- Include meal recommendations
-- Allow for rest and flexibility
+```bash
+# Parks
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "park" \
+  --radius 5000 \
+  --output "files/content/activities/parks.json"
 
-### Step 5: Document Results
+# Spas
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "spa" \
+  --radius 5000 \
+  --output "files/content/activities/spas.json"
 
-Create a summary with:
-- Top 10 recommended activities
-- Day-by-day suggestions
-- Estimated costs where available
-- Practical tips (booking requirements, best times)
+# Shopping
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "shopping_mall" \
+  --radius 5000 \
+  --output "files/content/activities/shopping.json"
+```
 
-## Output Format
+### Step 5: Search Occasion-Specific (Based on Description)
 
-Write results to:
-- `files/content/activities/` - Raw place search results
-- Summary in completion message
+Analyze the occasion description and search for relevant venues:
 
-## Completion
+Example for Monaco Grand Prix:
+```bash
+# Racing-related
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "point_of_interest" \
+  --query "Formula 1 racing motorsport" \
+  --radius 5000 \
+  --output "files/content/activities/occasion_specific.json"
+
+# Luxury venues (for high-end clientele)
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "[CITY]" \
+  --country "[COUNTRY]" \
+  --category "casino" \
+  --radius 5000 \
+  --output "files/content/activities/casinos.json"
+```
+
+### Step 6: Count Results
+
+Tally the total number of activities found across all categories:
+- Count from each category file
+- Note which categories have the most results
+
+### Step 7: Invoke Orchestrating Workflow
 
 When finished, invoke the orchestrating-workflow skill:
 
 ```
-Use Skill tool to invoke 'orchestrating-workflow' with args:
-'Activities research complete. Found [X] attractions across [CATEGORIES].
-Top recommendations: [TOP_3_ACTIVITIES]. Created [DAYS]-day activity plan.'
+Use Skill tool to invoke 'orchestrating-workflow' with message:
+'Activities research complete. Found [TOTAL] activities across [N] categories.
+Categories: restaurants ([X]), attractions ([Y]), museums ([Z]), etc.
+Written to files/content/activities/'
 ```
+
+## Output Format
+
+All results are written as JSON files in **flat list format**:
+
+```json
+[
+  {
+    "id": "place_xyz789",
+    "source": "google_maps",
+    "name": "Café de Paris Monte-Carlo",
+    "category": "restaurant",
+    "rating": 4.5,
+    "rating_count": 2500,
+    "address": "Place du Casino, Monaco",
+    "latitude": 43.7392,
+    "longitude": 7.4277,
+    "price_level": 3,
+    "types": ["restaurant", "cafe", "food"],
+    "occasion_relevance": null
+  }
+]
+```
+
+## Key Principles
+
+1. **Exhaustive Search**: Include ALL places, not just top-rated ones
+2. **Multiple Categories**: Cover dining, attractions, leisure, and occasion-specific
+3. **Use Occasion Description**: Understand context for relevant searches
+4. **No Price Filtering**: This is a masterlist, not a selection
+5. **Flat List Format**: Simple array tagged with source and category
 
 ## Skills Available
 
-- **google-maps**: For place searches, directions, and distances
+- **google-maps**: Place search via Google Maps API

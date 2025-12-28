@@ -1,16 +1,15 @@
 ---
 name: google-maps
-description: "Search places, calculate routes, and get directions via Google Maps API. Use for: (1) Activity/POI discovery by location and category, (2) Route planning between points with transit/driving/walking options, (3) Distance and travel time calculations, (4) Place details including hours, reviews, and photos. Essential for activity planning and ground transportation."
+description: "Search for places and activities via Google Maps Places API. For inventory agent: builds exhaustive activity masterlist across multiple categories."
 ---
 
-# Google Maps API Integration
+# Google Maps Skill - Inventory Agent
 
-## Overview
+Search for all activities, restaurants, attractions, and points of interest using Google Maps Places API. This skill is used to build exhaustive activity masterlists.
 
-Access location-based services via Google Maps Platform:
-- Places API (nearby search, text search, place details)
-- Directions API (routes with different travel modes)
-- Distance Matrix API (travel times between multiple points)
+## Purpose
+
+Build a comprehensive list of ALL activities in a location, across multiple categories. This is for quarterly masterlist building, not for trip planning.
 
 ## Environment Variables Required
 
@@ -18,116 +17,108 @@ Access location-based services via Google Maps Platform:
 
 ## Available Scripts
 
-### 1. Search Places
+### search_places.py
 
-Search for points of interest, restaurants, attractions, etc.
+Search for places by category and output flat list format.
 
 ```bash
 python3 .claude/skills/google-maps/scripts/search_places.py \
-  --query "museums in Paris" \
-  --location 48.8566,2.3522 \
-  --radius 5000 \
-  --type museum \
-  --output files/content/activities/paris/museums/
+  --city "Monaco" \
+  --country "Monaco" \
+  --category "restaurant" \
+  --output "files/content/activities/restaurants.json"
 ```
 
 **Parameters:**
-- `--query`: Search query (e.g., "restaurants near Eiffel Tower")
-- `--location`: Center point as latitude,longitude
-- `--radius`: Search radius in meters (max 50000)
-- `--type`: Place type filter (restaurant, museum, tourist_attraction, etc.)
-- `--output`: Output directory for results
+- `--city` (required): City name
+- `--country` (required): Country name
+- `--category` (required): Place category (restaurant, museum, tourist_attraction, etc.)
+- `--output` (optional): Output file path (default: stdout)
+- `--radius` (optional): Search radius in meters (default: 5000)
+- `--query` (optional): Additional search query to refine results
 
-**Output:**
-```
-files/content/activities/paris/museums/
-├── search_request.json    # Original request parameters
-├── places.json            # All returned places
-├── top_places.json        # Top 10 by rating
-└── summary.md             # Human-readable summary
-```
-
-### 2. Get Directions
-
-Calculate route between two points.
-
-```bash
-python3 .claude/skills/google-maps/scripts/get_directions.py \
-  --origin "Charles de Gaulle Airport" \
-  --destination "Hotel Le Bristol Paris" \
-  --mode transit \
-  --departure-time 2025-03-15T14:00:00 \
-  --output files/content/routes/cdg_to_hotel/
-```
-
-**Parameters:**
-- `--origin`: Starting point (address, place name, or lat,lng)
-- `--destination`: End point (address, place name, or lat,lng)
-- `--mode`: Travel mode (driving, walking, bicycling, transit)
-- `--departure-time`: Departure time for transit (ISO format)
-- `--alternatives`: Include alternative routes (flag)
-- `--output`: Output directory for results
-
-**Output:**
-```
-files/content/routes/cdg_to_hotel/
-├── request.json           # Original request
-├── routes.json            # All routes with steps
-└── summary.md             # Human-readable directions
+**Output Format (Flat List):**
+```json
+[
+  {
+    "id": "place_xyz789",
+    "source": "google_maps",
+    "name": "Café de Paris Monte-Carlo",
+    "category": "restaurant",
+    "rating": 4.5,
+    "rating_count": 2500,
+    "address": "Place du Casino, Monaco",
+    "latitude": 43.7392,
+    "longitude": 7.4277,
+    "price_level": 3,
+    "types": ["restaurant", "cafe", "food"],
+    "occasion_relevance": null
+  }
+]
 ```
 
-### 3. Distance Matrix
+## Place Categories
 
-Calculate travel times between multiple origins and destinations.
+Common categories for inventory building:
 
-```bash
-python3 .claude/skills/google-maps/scripts/distance_matrix.py \
-  --origins "Hotel Le Bristol Paris" \
-  --destinations "Louvre Museum,Eiffel Tower,Notre-Dame" \
-  --mode walking \
-  --output files/content/routes/day_1_distances/
-```
-
-**Parameters:**
-- `--origins`: One or more origin points (comma-separated)
-- `--destinations`: One or more destination points (comma-separated)
-- `--mode`: Travel mode
-- `--output`: Output directory for results
-
-**Output:**
-```
-files/content/routes/day_1_distances/
-├── request.json           # Original request
-├── matrix.json            # Distance/duration matrix
-└── summary.md             # Human-readable table
-```
-
-## Place Types
-
-Common place types for travel planning:
-- `tourist_attraction` - General attractions
-- `museum` - Museums and galleries
+**Dining:**
 - `restaurant` - Restaurants
 - `cafe` - Cafes and coffee shops
 - `bar` - Bars and pubs
-- `park` - Parks and gardens
-- `church` - Churches and religious sites
+
+**Attractions:**
+- `tourist_attraction` - General attractions
+- `museum` - Museums
 - `art_gallery` - Art galleries
-- `shopping_mall` - Shopping centers
+- `church` - Churches and religious sites
+
+**Leisure:**
+- `park` - Parks and gardens
 - `spa` - Spas and wellness
-- `gym` - Fitness centers
-- `airport` - Airports
-- `train_station` - Train stations
-- `bus_station` - Bus stations
+- `shopping_mall` - Shopping centers
+- `casino` - Casinos
 
-## Workflow
+**Occasion-Specific:**
+- Use `--query` to search for specific venues (e.g., "Formula 1 viewing", "yacht club")
 
-1. **Read trip_context.json** to get destination and preferences
-2. **Call search_places.py** for activity discovery
-3. **Call get_directions.py** for transportation routes
-4. **Call distance_matrix.py** for itinerary optimization
-5. **Read summary.md files** to provide recommendations
+## Usage in Activities Subagent
 
-## References
+```bash
+# 1. Search restaurants
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "Monaco" --country "Monaco" \
+  --category "restaurant" \
+  --output "files/content/activities/restaurants.json"
 
-See `references/api.md` for detailed Google Maps API documentation.
+# 2. Search cafes
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "Monaco" --country "Monaco" \
+  --category "cafe" \
+  --output "files/content/activities/cafes.json"
+
+# 3. Search tourist attractions
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "Monaco" --country "Monaco" \
+  --category "tourist_attraction" \
+  --output "files/content/activities/attractions.json"
+
+# 4. Search occasion-specific (e.g., Grand Prix related)
+python3 .claude/skills/google-maps/scripts/search_places.py \
+  --city "Monaco" --country "Monaco" \
+  --category "point_of_interest" \
+  --query "Formula 1 racing" \
+  --output "files/content/activities/f1_venues.json"
+```
+
+## Key Principles
+
+1. **Multiple categories** - Search across all relevant categories
+2. **No price filtering** - Include all places regardless of price level
+3. **Use occasion description** - Search for occasion-specific venues
+4. **Wide radius** - Use 5000-10000m to capture all places
+5. **Source tagging** - All results tagged with `"source": "google_maps"`
+6. **Flat list format** - Simple array of objects for masterlist
+
+## API Reference
+
+See `references/api.md` for Google Maps Places API documentation.

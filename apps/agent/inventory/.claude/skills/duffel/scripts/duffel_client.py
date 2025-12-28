@@ -7,6 +7,13 @@ import json
 import time
 import requests
 from typing import Dict, Any, Optional, List
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+# Load .env from inventory agent root (5 levels up: scripts -> duffel -> skills -> .claude -> inventory)
+inventory_root = Path(__file__).parent.parent.parent.parent.parent
+load_dotenv(inventory_root / ".env")
 
 DUFFEL_API_URL = "https://api.duffel.com"
 DUFFEL_API_VERSION = "v2"

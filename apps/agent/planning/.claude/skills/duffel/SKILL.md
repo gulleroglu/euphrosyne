@@ -1,16 +1,19 @@
 ---
 name: duffel
-description: "Search flights and hotels via Duffel API. Use for: (1) Flight searches with origin/destination airports, dates, and passenger counts, (2) Hotel/stays searches with location, dates, and guest counts, (3) Getting offer details and pricing breakdowns. Returns structured results with pricing and booking links."
+description: "Search LIVE flights via Duffel API with pricing and availability. Use for real-time flight search with cabin class selection, fare options, and seat availability. Returns structured flight offers for the transportation subagent."
 ---
 
-# Duffel Travel API Integration
+# Duffel API Integration - Planning Agent
 
 ## Overview
 
-Access flight and hotel search via Duffel API. This skill provides:
-- Flight offer requests (one-way, round-trip, multi-city)
-- Stays/accommodation searches
-- Offer details and pricing breakdowns
+Access LIVE flight search via Duffel API. This skill provides:
+- Real-time flight offer requests (one-way, round-trip)
+- Pricing with fare breakdowns
+- Cabin class options (economy, premium_economy, business, first)
+- Seat selection when available
+
+**Key**: This is a LIVE search - results reflect current availability and pricing.
 
 ## Environment Variables Required
 
@@ -18,85 +21,163 @@ Access flight and hotel search via Duffel API. This skill provides:
 
 ## Available Scripts
 
-### 1. Search Flights
+### Search Flights
 
-Search for flight offers between airports.
+Search for flight offers between airports with LIVE pricing.
 
 ```bash
 python3 .claude/skills/duffel/scripts/search_flights.py \
   --origin JFK \
-  --destination CDG \
-  --departure-date 2025-03-15 \
-  --return-date 2025-03-20 \
+  --destination NCE \
+  --departure-date 2025-05-22 \
+  --return-date 2025-05-26 \
   --adults 2 \
-  --cabin-class economy \
-  --output files/content/flights/search_001/
+  --cabin-class business \
+  --output files/content/transportation/
 ```
 
 **Parameters:**
-- `--origin`: Origin airport IATA code (e.g., JFK, LAX)
-- `--destination`: Destination airport IATA code (e.g., CDG, LHR)
+- `--origin`: Origin airport IATA code (e.g., JFK, LAX, LHR)
+- `--destination`: Destination airport IATA code (e.g., NCE, CDG, FCO)
 - `--departure-date`: Departure date (YYYY-MM-DD)
-- `--return-date`: Return date for round-trip (optional)
+- `--return-date`: Return date for round-trip (optional for one-way)
 - `--adults`: Number of adult passengers (default: 1)
 - `--children`: Number of child passengers (default: 0)
-- `--cabin-class`: Cabin class (economy, premium_economy, business, first)
+- `--infants`: Number of infant passengers (default: 0)
+- `--cabin-class`: Preferred cabin class (economy, premium_economy, business, first)
+- `--max-results`: Maximum offers to return (default: 10)
 - `--output`: Output directory for results
 
-**Output:**
+**Output Files:**
 ```
-files/content/flights/search_001/
-├── search_request.json    # Original request parameters
-├── offers.json            # All returned offers
-├── top_offers.json        # Top 5 offers by price
+files/content/transportation/
+├── search_request.json    # Original search parameters
+├── offers.json            # All returned offers (raw)
+├── results.json           # Structured results for Supabase
 └── summary.md             # Human-readable summary
 ```
 
-### 2. Search Hotels
+## Results Schema
 
-Search for hotel/stay accommodations.
+The `results.json` file contains structured data for `user_plans.transportation`:
 
-```bash
-python3 .claude/skills/duffel/scripts/search_hotels.py \
-  --location "Paris, France" \
-  --check-in 2025-03-15 \
-  --check-out 2025-03-20 \
-  --adults 2 \
-  --rooms 1 \
-  --output files/content/hotels/search_001/
+```json
+{
+  "outbound": {
+    "flight_id": "offer_abc123",
+    "airline": "Emirates",
+    "flight_number": "EK073",
+    "origin": "JFK",
+    "destination": "NCE",
+    "departure": "2025-05-22T22:00:00",
+    "arrival": "2025-05-23T12:30:00",
+    "duration": "8h 30m",
+    "cabin_class": "business",
+    "stops": 0,
+    "price": {
+      "amount": "2450.00",
+      "currency": "USD"
+    },
+    "seats_available": 4
+  },
+  "return": {
+    "flight_id": "offer_def456",
+    "airline": "Emirates",
+    "flight_number": "EK074",
+    "origin": "NCE",
+    "destination": "JFK",
+    "departure": "2025-05-26T14:00:00",
+    "arrival": "2025-05-26T18:30:00",
+    "duration": "9h 30m",
+    "cabin_class": "business",
+    "stops": 0,
+    "price": {
+      "amount": "2450.00",
+      "currency": "USD"
+    }
+  },
+  "total_price": {
+    "amount": "4900.00",
+    "currency": "USD"
+  },
+  "passengers": {
+    "adults": 2,
+    "children": 0,
+    "infants": 0
+  },
+  "alternatives": [
+    {
+      "airline": "Air France",
+      "total_price": "3200.00",
+      "cabin_class": "business",
+      "stops": 1
+    }
+  ]
+}
 ```
 
-**Parameters:**
-- `--location`: Location name or coordinates
-- `--latitude`: Latitude (alternative to location)
-- `--longitude`: Longitude (alternative to location)
-- `--check-in`: Check-in date (YYYY-MM-DD)
-- `--check-out`: Check-out date (YYYY-MM-DD)
-- `--adults`: Number of adult guests
-- `--rooms`: Number of rooms needed
-- `--output`: Output directory for results
+## Workflow for Transportation Subagent
 
-**Output:**
+1. **Read context files**:
+   - `files/process/user_context.json` - Get user preferences
+   - `files/process/occasion_context.json` - Get destination and dates
+
+2. **Extract search parameters**:
+   - Origin: From user preferences (home airport) or prompt
+   - Destination: From occasion city (find nearest airport)
+   - Dates: From occasion start_date/end_date (with buffer)
+   - Cabin class: From user preferences
+   - Passengers: From user preferences or default to 1 adult
+
+3. **Run flight search**:
+   ```bash
+   python3 .claude/skills/duffel/scripts/search_flights.py \
+     --origin [USER_AIRPORT] \
+     --destination [OCCASION_AIRPORT] \
+     --departure-date [DAY_BEFORE_START] \
+     --return-date [DAY_AFTER_END] \
+     --adults [COUNT] \
+     --cabin-class [PREFERENCE] \
+     --output files/content/transportation/
+   ```
+
+4. **Review results** and select best option based on preferences
+
+5. **Write final selection** to `files/content/transportation/results.json`
+
+## User Preferences Parsing
+
+The user's `preferences` field is markdown text. Look for:
+
+```markdown
+### Flights
+- Prefer business class for long haul
+- Window seat
+- Morning departures
+- Home airport: JFK
 ```
-files/content/hotels/search_001/
-├── search_request.json    # Original request parameters
-├── properties.json        # All returned properties
-├── top_properties.json    # Top 10 by rating/price
-└── summary.md             # Human-readable summary
-```
 
-## Workflow
+Extract:
+- `cabin_class`: "business" | "economy" | "first" | "premium_economy"
+- `seat_preference`: "window" | "aisle"
+- `departure_time`: "morning" | "afternoon" | "evening"
+- `home_airport`: IATA code
 
-1. **Read trip_context.json** to get search parameters
-2. **Call appropriate script** with extracted parameters
-3. **Write results** to files/content/ directory
-4. **Read summary.md** to provide recommendations
+## Airport Code Lookup
+
+Common mappings for occasion cities:
+- Monaco/Monte Carlo → NCE (Nice)
+- Paris → CDG or ORY
+- London → LHR or LGW
+- Rome → FCO
+- Milan → MXP
+- Barcelona → BCN
 
 ## Error Handling
 
-- If API key is missing, script will error with clear message
-- If no results found, empty results with message returned
-- Rate limits handled with exponential backoff
+- If `DUFFEL_API_KEY` missing: Script exits with clear error
+- If no flights found: Returns empty results with message
+- If API rate limited: Implements exponential backoff
 
 ## References
 

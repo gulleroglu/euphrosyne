@@ -6,8 +6,16 @@ import os
 import json
 import time
 import requests
+from pathlib import Path
 from typing import Dict, Any, Optional, List
 from urllib.parse import urlencode
+
+# Load environment variables from .env file
+from dotenv import load_dotenv
+
+# Load .env from planning agent root (4 levels up: scripts -> google-maps -> skills -> .claude -> planning)
+project_root = Path(__file__).parent.parent.parent.parent.parent
+load_dotenv(project_root / ".env")
 
 MAPS_BASE_URL = "https://maps.googleapis.com/maps/api"
 

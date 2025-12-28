@@ -1,16 +1,15 @@
 ---
 name: duffel
-description: "Search flights and hotels via Duffel API. Use for: (1) Flight searches with origin/destination airports, dates, and passenger counts, (2) Hotel/stays searches with location, dates, and guest counts, (3) Getting offer details and pricing breakdowns. Returns structured results with pricing and booking links."
+description: "Search for hotels using the Duffel Stays API. For inventory agent: builds exhaustive hotel masterlist without price/availability filters."
 ---
 
-# Duffel Travel API Integration
+# Duffel Skill - Inventory Agent
 
-## Overview
+Search for all hotels in a location using the Duffel Stays API. This skill is used to build exhaustive accommodation masterlists.
 
-Access flight and hotel search via Duffel API. This skill provides:
-- Flight offer requests (one-way, round-trip, multi-city)
-- Stays/accommodation searches
-- Offer details and pricing breakdowns
+## Purpose
+
+Build a comprehensive list of ALL available hotels in a location, regardless of price or availability. This is for quarterly masterlist building, not for booking.
 
 ## Environment Variables Required
 
@@ -18,86 +17,69 @@ Access flight and hotel search via Duffel API. This skill provides:
 
 ## Available Scripts
 
-### 1. Search Flights
+### search_hotels.py
 
-Search for flight offers between airports.
-
-```bash
-python3 .claude/skills/duffel/scripts/search_flights.py \
-  --origin JFK \
-  --destination CDG \
-  --departure-date 2025-03-15 \
-  --return-date 2025-03-20 \
-  --adults 2 \
-  --cabin-class economy \
-  --output files/content/flights/search_001/
-```
-
-**Parameters:**
-- `--origin`: Origin airport IATA code (e.g., JFK, LAX)
-- `--destination`: Destination airport IATA code (e.g., CDG, LHR)
-- `--departure-date`: Departure date (YYYY-MM-DD)
-- `--return-date`: Return date for round-trip (optional)
-- `--adults`: Number of adult passengers (default: 1)
-- `--children`: Number of child passengers (default: 0)
-- `--cabin-class`: Cabin class (economy, premium_economy, business, first)
-- `--output`: Output directory for results
-
-**Output:**
-```
-files/content/flights/search_001/
-├── search_request.json    # Original request parameters
-├── offers.json            # All returned offers
-├── top_offers.json        # Top 5 offers by price
-└── summary.md             # Human-readable summary
-```
-
-### 2. Search Hotels
-
-Search for hotel/stay accommodations.
+Search for hotels in a location and output flat list format.
 
 ```bash
 python3 .claude/skills/duffel/scripts/search_hotels.py \
-  --location "Paris, France" \
-  --check-in 2025-03-15 \
-  --check-out 2025-03-20 \
-  --adults 2 \
-  --rooms 1 \
-  --output files/content/hotels/search_001/
+  --city "Monaco" \
+  --country "Monaco" \
+  --check-in "2025-05-23" \
+  --check-out "2025-05-25" \
+  --output "files/content/accommodations/duffel_hotels.json"
 ```
 
 **Parameters:**
-- `--location`: Location name or coordinates
-- `--latitude`: Latitude (alternative to location)
-- `--longitude`: Longitude (alternative to location)
-- `--check-in`: Check-in date (YYYY-MM-DD)
-- `--check-out`: Check-out date (YYYY-MM-DD)
-- `--adults`: Number of adult guests
-- `--rooms`: Number of rooms needed
-- `--output`: Output directory for results
+- `--city` (required): City name for hotel search
+- `--country` (required): Country name
+- `--check-in` (optional): Check-in date (YYYY-MM-DD), defaults to 30 days from now
+- `--check-out` (optional): Check-out date (YYYY-MM-DD), defaults to 32 days from now
+- `--output` (optional): Output file path (default: stdout)
+- `--radius` (optional): Search radius in km (default: 10)
 
-**Output:**
+**Output Format (Flat List):**
+```json
+[
+  {
+    "id": "hot_xxx",
+    "source": "duffel",
+    "name": "Hotel Hermitage Monte-Carlo",
+    "stars": 5,
+    "rating": 4.8,
+    "rating_count": 1234,
+    "address": "Square Beaumarchais, Monaco",
+    "latitude": 43.7384,
+    "longitude": 7.4246,
+    "amenities": ["pool", "spa", "restaurant", "wifi"],
+    "price_range": null
+  }
+]
 ```
-files/content/hotels/search_001/
-├── search_request.json    # Original request parameters
-├── properties.json        # All returned properties
-├── top_properties.json    # Top 10 by rating/price
-└── summary.md             # Human-readable summary
+
+## Usage in Accommodation Subagent
+
+```bash
+# 1. Read occasion context to get location and dates
+# 2. Search hotels via duffel
+
+python3 .claude/skills/duffel/scripts/search_hotels.py \
+  --city "Monaco" \
+  --country "Monaco" \
+  --check-in "2025-05-23" \
+  --check-out "2025-05-25" \
+  --radius 15 \
+  --output "files/content/accommodations/duffel_hotels.json"
 ```
 
-## Workflow
+## Key Principles
 
-1. **Read trip_context.json** to get search parameters
-2. **Call appropriate script** with extracted parameters
-3. **Write results** to files/content/ directory
-4. **Read summary.md** to provide recommendations
+1. **No price filtering** - Include all hotels regardless of price
+2. **No availability filtering** - Include all hotels even if not available for dates
+3. **Exhaustive search** - Use wide radius to capture all properties
+4. **Source tagging** - All results tagged with `"source": "duffel"`
+5. **Flat list format** - Simple array of objects for masterlist
 
-## Error Handling
+## API Reference
 
-- If API key is missing, script will error with clear message
-- If no results found, empty results with message returned
-- Rate limits handled with exponential backoff
-
-## References
-
-See `references/api.md` for detailed Duffel API documentation.
+See `references/api.md` for Duffel Stays API documentation.

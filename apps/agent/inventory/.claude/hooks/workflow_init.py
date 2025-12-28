@@ -1,252 +1,90 @@
 #!/usr/bin/env python3
 """
-UserPromptSubmit hook: Parse trip request and initialize workflow
+UserPromptSubmit hook for Inventory Agent.
 
-Input: User's travel request (natural language)
+Input: occasion_id (UUID string)
 Output: Instruction to invoke orchestrating-workflow skill
 
 This hook:
-1. Parses the trip request to extract parameters
-2. Creates trip_context.json with structured data
-3. Initializes workflow_state.json
-4. Returns message to invoke orchestrating-workflow skill
+1. Parses occasion_id from the user prompt
+2. Fetches occasion data from Supabase
+3. Creates occasion_context.json
+4. Initializes workflow_state.json
+5. Returns message to invoke orchestrating-workflow skill
 """
 import json
 import sys
+import os
 import re
 from pathlib import Path
-from datetime import datetime, timedelta
-import dateparser
+from datetime import datetime
 
-# Paths
-project_root = Path.cwd()
+from dotenv import load_dotenv
+
+# Paths (hooks -> .claude -> inventory)
+project_root = Path(__file__).parent.parent.parent
+
+# Load .env from inventory agent root
+load_dotenv(project_root / ".env")
 process_dir = project_root / "files" / "process"
 workflow_state_file = process_dir / "workflow_state.json"
-trip_context_file = process_dir / "trip_context.json"
+occasion_context_file = process_dir / "occasion_context.json"
 
 
-def parse_travelers(prompt: str) -> dict:
-    """Extract traveler counts from prompt."""
-    travelers = {"adults": 2, "children": 0, "infants": 0}
-
-    # Match patterns like "2 adults", "for 4 people", "4 travelers"
-    adult_patterns = [
-        r'(\d+)\s*adult',
-        r'for\s*(\d+)\s*(?:people|person|travelers?)',
-        r'(\d+)\s*(?:people|person|travelers?)',
-    ]
-
-    for pattern in adult_patterns:
-        match = re.search(pattern, prompt, re.IGNORECASE)
-        if match:
-            travelers["adults"] = int(match.group(1))
-            break
-
-    # Match children
-    child_match = re.search(r'(\d+)\s*(?:child|children|kids?)', prompt, re.IGNORECASE)
-    if child_match:
-        travelers["children"] = int(child_match.group(1))
-
-    return travelers
+def extract_occasion_id(prompt: str) -> str | None:
+    """Extract UUID occasion_id from prompt."""
+    # Match UUID pattern
+    uuid_pattern = r'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    match = re.search(uuid_pattern, prompt)
+    if match:
+        return match.group(0)
+    return None
 
 
-def parse_budget(prompt: str) -> dict:
-    """Extract budget from prompt."""
-    budget = {"total": None, "currency": "USD"}
+def fetch_occasion_from_supabase(occasion_id: str) -> dict | None:
+    """Fetch occasion data from Supabase."""
+    try:
+        from supabase import create_client
 
-    # Match patterns like "$5000", "5000 USD", "budget of 5000"
-    patterns = [
-        r'\$\s*(\d+(?:,\d{3})*(?:\.\d{2})?)',
-        r'(\d+(?:,\d{3})*(?:\.\d{2})?)\s*(?:USD|dollars?)',
-        r'budget\s*(?:of\s*)?\$?\s*(\d+(?:,\d{3})*)',
-    ]
+        supabase_url = os.environ.get("SUPABASE_URL")
+        supabase_key = os.environ.get("SUPABASE_KEY")
 
-    for pattern in patterns:
-        match = re.search(pattern, prompt, re.IGNORECASE)
-        if match:
-            budget["total"] = int(match.group(1).replace(",", "").split(".")[0])
-            break
+        if not supabase_url or not supabase_key:
+            print("Error: SUPABASE_URL and SUPABASE_KEY environment variables required.")
+            return None
 
-    # Check for EUR
-    if re.search(r'EUR|euros?', prompt, re.IGNORECASE):
-        budget["currency"] = "EUR"
+        client = create_client(supabase_url, supabase_key)
 
-    return budget
+        response = client.table("occasions").select("*").eq("id", occasion_id).single().execute()
 
+        if response.data:
+            return response.data
+        else:
+            print(f"Error: No occasion found with id: {occasion_id}")
+            return None
 
-def parse_dates(prompt: str) -> dict:
-    """Extract travel dates from prompt."""
-    dates = {
-        "departure": None,
-        "return": None,
-        "duration_nights": None,
-        "flexible": False
-    }
-
-    # Try to find date ranges like "March 15-20" or "March 15 to March 20"
-    range_pattern = r'(\w+\s+\d{1,2})(?:\s*[-–]\s*|\s+to\s+)(\d{1,2}|\w+\s+\d{1,2})'
-    range_match = re.search(range_pattern, prompt, re.IGNORECASE)
-
-    if range_match:
-        start_str = range_match.group(1)
-        end_str = range_match.group(2)
-
-        # Parse start date
-        start_date = dateparser.parse(start_str, settings={'PREFER_DATES_FROM': 'future'})
-
-        # If end is just a number, it's the same month
-        if end_str.isdigit():
-            end_str = f"{start_str.split()[0]} {end_str}"
-
-        end_date = dateparser.parse(end_str, settings={'PREFER_DATES_FROM': 'future'})
-
-        if start_date and end_date:
-            dates["departure"] = start_date.strftime("%Y-%m-%d")
-            dates["return"] = end_date.strftime("%Y-%m-%d")
-            dates["duration_nights"] = (end_date - start_date).days
-
-    # Try to find duration like "5 days", "1 week"
-    duration_match = re.search(r'(\d+)\s*(?:day|night)s?', prompt, re.IGNORECASE)
-    if duration_match and not dates["duration_nights"]:
-        dates["duration_nights"] = int(duration_match.group(1))
-
-    week_match = re.search(r'(\d+)\s*weeks?', prompt, re.IGNORECASE)
-    if week_match and not dates["duration_nights"]:
-        dates["duration_nights"] = int(week_match.group(1)) * 7
-
-    # Check for flexibility
-    if re.search(r'flexible|around|approximately', prompt, re.IGNORECASE):
-        dates["flexible"] = True
-
-    return dates
+    except ImportError:
+        print("Error: supabase-py package not installed. Run: pip install supabase")
+        return None
+    except Exception as e:
+        print(f"Error fetching occasion: {e}")
+        return None
 
 
-def parse_locations(prompt: str) -> tuple:
-    """Extract origin and destination from prompt."""
-    origin = None
-    destination = None
-
-    # Common patterns for origin
-    origin_patterns = [
-        r'from\s+([A-Z][a-zA-Z\s,]+?)(?:\s+to\s+|\s+departing|\s+leaving)',
-        r'departing\s+(?:from\s+)?([A-Z][a-zA-Z\s,]+?)(?:\s+to\s+|\s+on)',
-        r'leaving\s+(?:from\s+)?([A-Z][a-zA-Z\s,]+?)(?:\s+to\s+|\s+on)',
-    ]
-
-    for pattern in origin_patterns:
-        match = re.search(pattern, prompt)
-        if match:
-            origin = match.group(1).strip().rstrip(',')
-            break
-
-    # Fallback: look for common city abbreviations
-    if not origin:
-        city_abbrevs = {
-            'NYC': 'New York, NY',
-            'LA': 'Los Angeles, CA',
-            'SF': 'San Francisco, CA',
-            'CHI': 'Chicago, IL',
-            'BOS': 'Boston, MA',
-            'SEA': 'Seattle, WA',
-            'DEN': 'Denver, CO',
-            'MIA': 'Miami, FL',
-        }
-        for abbrev, city in city_abbrevs.items():
-            if re.search(rf'\b{abbrev}\b', prompt):
-                origin = city
-                break
-
-    # Common patterns for destination
-    dest_patterns = [
-        r'to\s+([A-Z][a-zA-Z\s,]+?)(?:\s+for\s+|\s+from\s+|\s+departing|\s*[,.]|$)',
-        r'trip\s+to\s+([A-Z][a-zA-Z\s,]+?)(?:\s+for\s+|\s*[,.]|$)',
-        r'visit(?:ing)?\s+([A-Z][a-zA-Z\s,]+?)(?:\s+for\s+|\s*[,.]|$)',
-        r'travel(?:ing)?\s+to\s+([A-Z][a-zA-Z\s,]+?)(?:\s+for\s+|\s*[,.]|$)',
-    ]
-
-    for pattern in dest_patterns:
-        match = re.search(pattern, prompt)
-        if match:
-            destination = match.group(1).strip().rstrip(',')
-            break
-
-    return origin, destination
-
-
-def parse_preferences(prompt: str) -> dict:
-    """Extract travel preferences from prompt."""
-    preferences = {
-        "flight_class": "economy",
-        "hotel_stars": None,
-        "interests": [],
-        "dietary": None,
-        "accessibility": None
-    }
-
-    # Flight class
-    if re.search(r'business\s*class', prompt, re.IGNORECASE):
-        preferences["flight_class"] = "business"
-    elif re.search(r'first\s*class', prompt, re.IGNORECASE):
-        preferences["flight_class"] = "first"
-    elif re.search(r'premium\s*economy', prompt, re.IGNORECASE):
-        preferences["flight_class"] = "premium_economy"
-
-    # Hotel stars
-    star_match = re.search(r'(\d)\s*star', prompt, re.IGNORECASE)
-    if star_match:
-        preferences["hotel_stars"] = int(star_match.group(1))
-
-    # Interests
-    interest_keywords = [
-        'museum', 'art', 'history', 'food', 'cuisine', 'beach', 'hiking',
-        'shopping', 'nightlife', 'nature', 'adventure', 'culture', 'architecture',
-        'wine', 'spa', 'relaxation', 'photography', 'music', 'sports'
-    ]
-
-    for keyword in interest_keywords:
-        if re.search(rf'\b{keyword}s?\b', prompt, re.IGNORECASE):
-            preferences["interests"].append(keyword)
-
-    return preferences
-
-
-def parse_trip_request(prompt: str) -> dict:
-    """
-    Parse natural language trip request into structured data.
-    """
-    origin, destination = parse_locations(prompt)
-    dates = parse_dates(prompt)
-    travelers = parse_travelers(prompt)
-    budget = parse_budget(prompt)
-    preferences = parse_preferences(prompt)
-
-    context = {
-        "parsed_at": datetime.now().isoformat(),
-        "raw_prompt": prompt,
-        "origin": origin,
-        "destination": destination,
-        "dates": dates,
-        "travelers": travelers,
-        "budget": budget,
-        "preferences": preferences
-    }
-
-    return context
-
-
-def initialize_workflow_state() -> dict:
-    """Create initial workflow state."""
+def initialize_workflow_state(occasion_id: str) -> dict:
+    """Create initial workflow state for inventory agent."""
     return {
+        "occasion_id": occasion_id,
         "current_step": 0,
-        "steps": ["transportation", "accommodation", "activities", "verification", "booking"],
+        "steps": ["accommodation", "activities"],
         "completed_steps": [],
-        "skip_booking": False,
         "status": "initialized",
-        "started_at": datetime.now().isoformat()
+        "started_at": datetime.now().isoformat(),
+        "history": []
     }
 
 
-def analyze_existing_workflow():
+def analyze_existing_workflow() -> tuple:
     """Check if there's an existing workflow in progress."""
     if not workflow_state_file.exists():
         return None, None
@@ -261,7 +99,7 @@ def analyze_existing_workflow():
             return "resume", state
         else:
             return None, None
-    except:
+    except Exception:
         return None, None
 
 
@@ -277,50 +115,73 @@ except json.JSONDecodeError:
     prompt = ""
 
 if not prompt:
-    print("Error: No trip request provided. Please describe your trip.")
+    print("Error: No occasion_id provided. Please provide an occasion UUID.")
+    sys.exit(1)
+
+# Extract occasion_id from prompt
+occasion_id = extract_occasion_id(prompt)
+
+if not occasion_id:
+    print("Error: Could not find a valid UUID in the input. Please provide an occasion_id.")
     sys.exit(1)
 
 # Check for existing workflow
 status_type, existing_state = analyze_existing_workflow()
 
-if status_type == "complete":
-    print("Previous workflow completed. Starting fresh with new trip request.")
-elif status_type == "resume":
-    current_step = existing_state.get("current_step", 0)
-    steps = existing_state.get("steps", [])
-    if current_step < len(steps):
-        current_agent = steps[current_step]
-        print(f"Resuming workflow at step {current_step + 1}: {current_agent}")
-        print(f"Use Skill tool to invoke 'orchestrating-workflow' skill to continue.")
-        sys.exit(0)
+if status_type == "resume":
+    existing_occasion_id = existing_state.get("occasion_id")
+    if existing_occasion_id == occasion_id:
+        current_step = existing_state.get("current_step", 0)
+        steps = existing_state.get("steps", [])
+        if current_step < len(steps):
+            current_agent = steps[current_step]
+            print(f"Resuming workflow at step {current_step + 1}: {current_agent}")
+            print(f"Use Skill tool to invoke 'orchestrating-workflow' skill to continue.")
+            sys.exit(0)
+    else:
+        print(f"New occasion detected. Starting fresh workflow for: {occasion_id}")
 
-# Parse trip request
-trip_context = parse_trip_request(prompt)
+# Fetch occasion from Supabase
+occasion_data = fetch_occasion_from_supabase(occasion_id)
+
+if not occasion_data:
+    sys.exit(1)
+
+# Create occasion context
+occasion_context = {
+    "id": occasion_data.get("id"),
+    "occasion": occasion_data.get("occasion"),
+    "description": occasion_data.get("description"),
+    "city": occasion_data.get("city"),
+    "country": occasion_data.get("country"),
+    "full_address": occasion_data.get("full_address"),
+    "start_date": occasion_data.get("start_date"),
+    "end_date": occasion_data.get("end_date")
+}
 
 # Create process directory if needed
 process_dir.mkdir(parents=True, exist_ok=True)
 
-# Save trip context
-with open(trip_context_file, 'w') as f:
-    json.dump(trip_context, f, indent=2)
+# Save occasion context
+with open(occasion_context_file, 'w') as f:
+    json.dump(occasion_context, f, indent=2)
 
 # Initialize workflow state
-workflow_state = initialize_workflow_state()
+workflow_state = initialize_workflow_state(occasion_id)
 with open(workflow_state_file, 'w') as f:
     json.dump(workflow_state, f, indent=2)
 
 # Build initialization message
-init_message = f"""Workflow initialized for trip request.
+init_message = f"""Inventory workflow initialized for occasion.
 
-Trip Context:
-- Origin: {trip_context.get('origin', 'Not specified')}
-- Destination: {trip_context.get('destination', 'Not specified')}
-- Dates: {trip_context.get('dates', {}).get('departure', 'TBD')} to {trip_context.get('dates', {}).get('return', 'TBD')}
-- Travelers: {trip_context.get('travelers', {}).get('adults', 2)} adults
-- Budget: {trip_context.get('budget', {}).get('total', 'Not specified')} {trip_context.get('budget', {}).get('currency', 'USD')}
+Occasion Context:
+- Occasion: {occasion_context.get('occasion', 'Unknown')}
+- Description: {occasion_context.get('description', 'No description')[:100]}...
+- Location: {occasion_context.get('city', 'Unknown')}, {occasion_context.get('country', 'Unknown')}
+- Dates: {occasion_context.get('start_date', 'TBD')} to {occasion_context.get('end_date', 'TBD')}
 
 Use Skill tool to invoke 'orchestrating-workflow' skill with message:
-'Workflow initialized. Starting travel planning sequence.'"""
+'Workflow initialized. Starting inventory sequence for {occasion_context.get('occasion', 'occasion')}.'"""
 
 print(init_message)
 sys.exit(0)

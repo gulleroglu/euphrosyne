@@ -6,7 +6,15 @@ import os
 import json
 import time
 import requests
+from pathlib import Path
 from typing import Dict, Any, Optional, List
+
+# Load environment variables from .env file
+from dotenv import load_dotenv
+
+# Load .env from planning agent root (4 levels up: scripts -> duffel -> skills -> .claude -> planning)
+project_root = Path(__file__).parent.parent.parent.parent.parent
+load_dotenv(project_root / ".env")
 
 DUFFEL_API_URL = "https://api.duffel.com"
 DUFFEL_API_VERSION = "v2"

@@ -6,8 +6,24 @@ import os
 import json
 import time
 import requests
+from pathlib import Path
 from typing import Dict, Any, Optional, List
 from urllib.parse import urlencode
+
+# Load environment variables from .env file in revision folder
+project_root = Path(__file__).parent.parent.parent.parent.parent
+env_file = project_root / ".env"
+if env_file.exists():
+    from dotenv import load_dotenv
+    load_dotenv(env_file)
+else:
+    # Try parent directories
+    for parent in [project_root.parent, project_root.parent.parent]:
+        env_file = parent / ".env"
+        if env_file.exists():
+            from dotenv import load_dotenv
+            load_dotenv(env_file)
+            break
 
 MAPS_BASE_URL = "https://maps.googleapis.com/maps/api"
 

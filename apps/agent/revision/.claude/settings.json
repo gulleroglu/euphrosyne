@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd $(git rev-parse --show-toplevel) && python3 .claude/hooks/workflow_init.py"
+            "command": "python3 .claude/hooks/workflow_init.py"
           }
         ]
       }
@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd $(git rev-parse --show-toplevel) && python3 .claude/hooks/workflow_continue.py"
+            "command": "python3 .claude/hooks/workflow_continue.py"
           }
         ]
       }

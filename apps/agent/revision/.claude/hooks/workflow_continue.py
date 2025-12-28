@@ -13,7 +13,7 @@ import fcntl
 import time
 
 # Paths
-project_root = Path.cwd()
+project_root = Path(__file__).parent.parent.parent
 process_dir = project_root / "files" / "process"
 workflow_state_file = process_dir / "workflow_state.json"
 lock_file = process_dir / ".workflow_continue.lock"
