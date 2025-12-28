@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Skill(duffel)",
+      "Skill(google-maps)",
+      "Skill(orchestrating-workflow)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd $(git rev-parse --show-toplevel) && python3 .claude/hooks/workflow_init.py"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd $(git rev-parse --show-toplevel) && python3 .claude/hooks/workflow_continue.py"
+          }
+        ]
+      }
+    ]
+  },
+  "disableAllHooks": false
+}

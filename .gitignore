@@ -34,3 +34,6 @@ coverage/
 *.log
 *.local
 .env.*.local
+
+# Examples
+examples/

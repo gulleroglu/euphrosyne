@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Skill(duffel)",
+      "Skill(google-maps)",
+      "Skill(orchestrating-workflow)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
