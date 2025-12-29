@@ -1,0 +1,1102 @@
+{
+  "occasion": {
+    "name": "Andrea Bocelli's Annual Concert in Teatro del Silenzio",
+    "description": "The Teatro del Silenzio is a natural amphitheater created in the beautiful setting of the Lajatico hills, born from the vision of Maestro Andrea Bocelli. For the rest of the year the stage transforms into a lake with rotating sculptures - a 'silent' project living for just a few days with national and international stars of bel canto, music, and dance.",
+    "dates": "July 23, 2026",
+    "season": "summer"
+  },
+  "location": {
+    "primary": "Teatro del Silenzio, Lajatico, Tuscany, Italy",
+    "city": "Lajatico",
+    "province": "Pisa",
+    "country": "IT",
+    "region": "Tuscany",
+    "nearby_towns": ["Volterra", "San Gimignano", "Terricciola", "Peccioli"]
+  },
+  "research_insights": {
+    "region_identity": "Lajatico is Andrea Bocelli's birthplace, located in rural Tuscany between Pisa and Volterra. The area sits almost outside mass tourism routes with rolling wheat fields, gentle hillsides, and absolute tranquility. Nearby Volterra offers 2,500 years of Etruscan history and is famous for alabaster craftsmanship.",
+    "unique_experiences": [
+      "Teatro del Silenzio concert - once-a-year magical event under the stars",
+      "Officine Bocelli - museum, artisanal products, and Bocelli family experiences",
+      "Volterra's Etruscan heritage - ancient gates, Roman theatre, world-class museum",
+      "Chianti wine route between Florence and Siena",
+      "San Gimignano's medieval towers (30 minutes away)",
+      "Val d'Orcia UNESCO landscape",
+      "Bolgheri wine region (coastal Super Tuscans)",
+      "Alabaster workshops - ancient craft unique to Volterra"
+    ],
+    "seasonal_considerations": "July is peak summer - perfect for outdoor dining, vineyard tours, scenic drives, and evening concerts. Hot days (30C+) make morning activities and air-conditioned wine cellars appealing. The concert is an evening event, leaving days free for exploration.",
+    "excluded_activities": [],
+    "exclusion_reasoning": "Summer timing makes all outdoor activities suitable. No exclusions necessary - the season supports the full range of Tuscan experiences."
+  },
+  "categories": [
+    {
+      "name": "Teatro del Silenzio & Bocelli Heritage",
+      "relevance": "Core to the occasion - guests are attending for Bocelli, and the Teatro/Lajatico area offers immersive experiences around his legacy",
+      "search_queries": ["Teatro del Silenzio", "Bocelli museum", "Bocelli experience"],
+      "places": [
+        {
+          "id": "ChIJvyiy5iAPKhMRK53gqfYvWJM",
+          "name": "Teatro del Silenzio",
+          "rating": 4.6,
+          "rating_count": 2816,
+          "address": "Via dell'Uccelliera, 56030 Lajatico PI, Italy",
+          "latitude": 43.4700889,
+          "longitude": 10.7368383,
+          "price_level": null,
+          "types": ["point_of_interest", "establishment"],
+          "why_included": "The concert venue itself - a natural amphitheater that transforms into a silent lake with sculptures 364 days a year",
+          "review_summary": {
+            "total_reviews": 2816,
+            "what_guests_love": [
+              {"theme": "Magical atmosphere", "quote": "Andrea Bocelli's concert was a breathtaking experience. His voice echoed through the Tuscan hills, blending perfectly with the serene setting"},
+              {"theme": "Once-in-a-lifetime", "quote": "The concert itself was the highlight of our trip to Tuscany. Andrea and his friends ruled that night. It's magical and an experience of a lifetime"},
+              {"theme": "Scenic setting", "quote": "Silent theatre, which turns into an empty field after the concert, but before that it was a concert area with a perfect atmosphere"}
+            ],
+            "negatives": [
+              {"issue": "Bar service chaos", "quote": "Waited nearly an hour just to get a glass of prosecco. Bars 5/10"},
+              {"issue": "Shuttle bus logistics", "quote": "Shuttle buses 1/10 - chaotic and slow, took almost two hours to reach the parking lot after the show"},
+              {"issue": "Toilet queues", "quote": "A big disadvantage are the queues for the toilets. Simply not enough"}
+            ],
+            "practical_tips": [
+              "Arrive early for parking (P2) - traffic is heavy on concert day",
+              "Bring cash for parking (15 EUR in 2025)",
+              "Wear comfortable shoes - you'll walk in rural areas",
+              "Be prepared for cool evening weather or rain drops",
+              "Concert actually starts around 21:00"
+            ],
+            "best_for": "Anyone seeking a once-in-a-lifetime concert experience in an incomparable natural setting",
+            "skip_if": "You have mobility issues or are very sensitive to crowds and logistics challenges"
+          }
+        },
+        {
+          "id": "ChIJ6ZrMZwAPKhMRbhlzthR-anQ",
+          "name": "Andrea Bocelli 30: The Celebration",
+          "rating": 4.0,
+          "rating_count": 11,
+          "address": "Via dell'Uccelliera, 56030 Lajatico PI",
+          "latitude": 43.4697543,
+          "longitude": 10.7380528,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Special anniversary celebration venue/experience connected to Bocelli's legacy",
+          "review_summary": {
+            "total_reviews": 11,
+            "what_guests_love": [
+              {"theme": "Spectacular performances", "quote": "Excellent concert with great special guests. Worth time and money to attend"},
+              {"theme": "Legendary artists", "quote": "I had the honor to watch Andrea Bocelli, Jose Carreras and Placido Domingo on the stage singing"},
+              {"theme": "Perfect atmosphere", "quote": "Silent theatre with a perfect atmosphere, Bocelli gathered thousands of people with his legendary performance"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Book tickets well in advance - sells out quickly",
+              "Part of Teatro del Silenzio annual events"
+            ],
+            "best_for": "Opera and classical music lovers, Bocelli fans",
+            "skip_if": "You're not interested in classical/operatic performances"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tuscan Wine Estates & Tastings",
+      "relevance": "Tuscany's wine heritage is legendary. July is perfect for vineyard visits, cellar tours, and tastings. Chianti Classico and Bolgheri are within driving distance.",
+      "search_queries": ["winery vineyard wine tasting", "Chianti wine estate", "Bolgheri winery"],
+      "places": [
+        {
+          "id": "ChIJU1nq4280KhMRXzq3y1LrINE",
+          "name": "Poggio Amorelli",
+          "rating": 4.9,
+          "rating_count": 1143,
+          "address": "Loc, Poggio Amorelli, 53011 Castellina in Chianti SI",
+          "latitude": 43.4784387,
+          "longitude": 11.2960721,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "food", "establishment"],
+          "why_included": "Exceptional boutique winery with stunning views, intimate tastings, and exceptional hospitality - perfect for a special occasion",
+          "review_summary": {
+            "total_reviews": 1143,
+            "what_guests_love": [
+              {"theme": "Intimate experience", "quote": "I absolutely loved how intimate this was. The total group was small and it felt personal"},
+              {"theme": "Outstanding food", "quote": "The 'light lunch' was delightful and much more than we expected. It was beyond the value of what we paid"},
+              {"theme": "Exceptional hosts", "quote": "Francesco was absolutely amazing! He made us feel so well taken care of always focused on our tastes"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Book the wine + meal package - it's excellent value",
+              "Request Tommaso or Francesco as hosts for best experience",
+              "Perfect for anniversary celebrations"
+            ],
+            "best_for": "Couples, special occasions, those wanting intimate rather than commercial wine experiences",
+            "skip_if": "You prefer large, famous wineries with extensive facilities"
+          }
+        },
+        {
+          "id": "ChIJC04afpBLKhMRIKRR5-1c4Dg",
+          "name": "Castello di Verrazzano",
+          "rating": 4.7,
+          "rating_count": 1318,
+          "address": "Via Castello di Verrazzano, 1, 50022 Greve in Chianti FI",
+          "latitude": 43.6015709,
+          "longitude": 11.2851799,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "food", "establishment"],
+          "why_included": "Historic castle winery with stunning Chianti views, comprehensive tours, and rich history (explorer Giovanni da Verrazzano's birthplace)",
+          "review_summary": {
+            "total_reviews": 1318,
+            "what_guests_love": [
+              {"theme": "Rich history", "quote": "The history here is stunning. Wines were so very good that we bought a case to be shipped back home"},
+              {"theme": "Expert tours", "quote": "A fantastic winery experience - one of our highlights in Tuscany. Beautifully perched on top of a hill"},
+              {"theme": "Great value", "quote": "Around 30 EUR per person, excellent value for what you get. After the tour, we enjoyed a guided tasting of four different wines"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Book tour + tasting in advance",
+              "Tour lasts about 45 minutes",
+              "They ship wine internationally"
+            ],
+            "best_for": "History lovers, those wanting a comprehensive winery experience with tour",
+            "skip_if": "You prefer quick, informal tastings"
+          }
+        },
+        {
+          "id": "ChIJ78nL_M5IKhMRShNYlBdmZOE",
+          "name": "Antinori nel Chianti Classico",
+          "rating": 4.5,
+          "rating_count": 2018,
+          "address": "Via Cassia per Siena, 133, 50026 Bargino FI",
+          "latitude": 43.6123886,
+          "longitude": 11.1916161,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "food", "establishment"],
+          "why_included": "Architectural masterpiece winery by Marchesi Antinori - the vineyard forms the roof, stunning modern design merged with landscape",
+          "review_summary": {
+            "total_reviews": 2018,
+            "what_guests_love": [
+              {"theme": "Architecture", "quote": "It was an absolutely astonishing piece of architecture where the vineyard made the roof and the entire building merged with the nature landscape"},
+              {"theme": "Professional service", "quote": "What surprised me was that when a business is family-run, you get a completely different level of care and attention"},
+              {"theme": "Quality experience", "quote": "The tasting was performed very well, with a thoughtful storyline accompanying each wine"}
+            ],
+            "negatives": [
+              {"issue": "Parking distance", "quote": "Only downside was the carpark is a bit far away which would be challenging for elderly"}
+            ],
+            "practical_tips": [
+              "Book tours well in advance - very popular",
+              "Walk-in tastings available at the wine shop",
+              "Private tours with lunch available"
+            ],
+            "best_for": "Architecture enthusiasts, design lovers, those wanting a premium large-scale winery experience",
+            "skip_if": "You prefer intimate boutique wineries"
+          }
+        },
+        {
+          "id": "ChIJO7O9ZPwbKhMRm1zml0R1eaY",
+          "name": "Terre de' Pepi Winery - Azienda Agricola Bio",
+          "rating": 4.9,
+          "rating_count": 161,
+          "address": "Localita Vedremo, 56048 Volterra PI, Italy",
+          "latitude": 43.3858572,
+          "longitude": 10.8372163,
+          "price_level": null,
+          "types": ["point_of_interest", "food", "establishment"],
+          "why_included": "Small organic family winery closest to Lajatico - authentic, humble experience with stunning sunset views over Tuscan countryside",
+          "review_summary": {
+            "total_reviews": 161,
+            "what_guests_love": [
+              {"theme": "Authentic experience", "quote": "Small business with humble and very gracious owners. First generation owned, husband and wife operation"},
+              {"theme": "Outstanding wines", "quote": "We had the best wine we've tasted in all of Tuscany!"},
+              {"theme": "Magical sunsets", "quote": "Watching the sunset from there was absolutely magical - definitely a highlight of our stay"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Free tastings available",
+              "They also produce excellent olive oil",
+              "Can camp overnight if traveling by van"
+            ],
+            "best_for": "Those seeking authentic, off-the-beaten-path experiences with passionate family producers",
+            "skip_if": "You want polished, commercial wine tourism"
+          }
+        },
+        {
+          "id": "ChIJGT1Fn6MC1hIReaXrdsVrU4s",
+          "name": "Farm Lands of the Marquis (Bolgheri)",
+          "rating": 4.8,
+          "rating_count": 416,
+          "address": "Via Localita Sant'Uberto, 164, 57022 Bolgheri LI",
+          "latitude": 43.214838,
+          "longitude": 10.581393,
+          "price_level": null,
+          "types": ["tourist_attraction", "bar", "food", "point_of_interest", "establishment"],
+          "why_included": "Bolgheri wine region - home of Super Tuscans like Sassicaia and Ornellaia. Coastal wines with different character from Chianti",
+          "review_summary": {
+            "total_reviews": 416,
+            "what_guests_love": [
+              {"theme": "Outstanding wines", "quote": "Excellent wines and great hospitality. The Bolgheri region produces some of Italy's finest Super Tuscans"},
+              {"theme": "Beautiful setting", "quote": "Gorgeous cypress-lined avenue leading to the estate. The Tuscan coast provides a different terroir from inland Chianti"},
+              {"theme": "Expert tastings", "quote": "Knowledgeable staff who explain the unique character of coastal Tuscan wines"}
+            ],
+            "negatives": [
+              {"issue": "Distance", "quote": "Further from the main Chianti route, requires dedicated trip"}
+            ],
+            "practical_tips": [
+              "Book tastings in advance",
+              "Famous for Cabernet-based Super Tuscans",
+              "About 1 hour from Lajatico"
+            ],
+            "best_for": "Wine connoisseurs interested in Super Tuscans and coastal terroir",
+            "skip_if": "You only have time for one wine region - Chianti is closer"
+          }
+        },
+        {
+          "id": "ChIJuXTFPGk5KhMRBJ4bc8JyP2A",
+          "name": "Tenuta di Cusona GUICCIARDINI STROZZI",
+          "rating": 4.7,
+          "rating_count": 107,
+          "address": "Localita Cusona, 5, 53037 San Gimignano SI",
+          "latitude": 43.4922418,
+          "longitude": 11.0986444,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "food", "establishment"],
+          "why_included": "Historic estate near San Gimignano - produces Vernaccia di San Gimignano (Italy's first DOCG white wine)",
+          "review_summary": {
+            "total_reviews": 107,
+            "what_guests_love": [
+              {"theme": "Noble heritage", "quote": "We were guided by one of the Princesses whose family owns the winery. The family is also distant relatives to the Mona Lisa"},
+              {"theme": "Excellent tours", "quote": "Elisa was incredibly knowledgeable and gave an excellent tour of the winery, making the history and winemaking process come alive"},
+              {"theme": "Unique treasures", "quote": "Loved all the treats and treasures we found along the tour - from Fiat's only tractor to old motorcycles and so much more"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Book the classic tour for full experience",
+              "Famous for Vernaccia di San Gimignano white wine",
+              "Family-owned since the 11th century"
+            ],
+            "best_for": "History lovers, those interested in noble Tuscan heritage and white wines",
+            "skip_if": "You're only interested in red wines"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Etruscan Heritage & Volterra Culture",
+      "relevance": "Volterra offers 2,500 years of history just 20km from Lajatico. The Etruscan civilization predates Rome, and Volterra is its best-preserved center. Perfect for daytime cultural exploration.",
+      "search_queries": ["etruscan museum", "roman theatre Volterra", "historical landmark"],
+      "places": [
+        {
+          "id": "ChIJF0oA6kYaKhMRdwzQbgQiyKQ",
+          "name": "Museo Etrusco Mario Guarnacci",
+          "rating": 4.5,
+          "rating_count": 2172,
+          "address": "Via Don Giovanni Minzoni, 15, 56048 Volterra PI",
+          "latitude": 43.4008505,
+          "longitude": 10.864256,
+          "price_level": null,
+          "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "World-class Etruscan museum with exceptional artifacts including the famous 'Ombra della Sera' bronze and countless funerary urns",
+          "review_summary": {
+            "total_reviews": 2172,
+            "what_guests_love": [
+              {"theme": "Unique collection", "quote": "This is THE presentation of Etruscan life. The museum has undergone an amazing upgrade thanks to the EU"},
+              {"theme": "Pre-Roman history", "quote": "Amidst all the Roman ruins in Italy, the Etruscans often get overlooked. This museum has a ton of artifacts older than the Roman empire"},
+              {"theme": "Modern presentation", "quote": "Inside, the museum is very modern and well organized. The displays are beautiful and have more interpretive material than other museums"}
+            ],
+            "negatives": [
+              {"issue": "Some dated rooms", "quote": "There are some sections which look as if they're still awaiting reorganisation"},
+              {"issue": "Many funerary urns", "quote": "There are more funerary urns than most people need"}
+            ],
+            "practical_tips": [
+              "Visit during 'Notte Bianca' for free evening access (July)",
+              "Bilingual signage (Italian/English)",
+              "Allow 1-2 hours",
+              "Parking available 50 yards down the road"
+            ],
+            "best_for": "History enthusiasts, anyone interested in pre-Roman Italy, families",
+            "skip_if": "You have limited museum tolerance or prefer outdoor activities"
+          }
+        },
+        {
+          "id": "ChIJb5HikEMaKhMRJ5Qj39dulAA",
+          "name": "Roman Theatre",
+          "rating": 4.4,
+          "rating_count": 4336,
+          "address": "Piazza Caduti nei Lager Nazisti, 56048 Volterra PI",
+          "latitude": 43.4037257,
+          "longitude": 10.8599478,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Well-preserved Roman amphitheatre from 1st century BC, now used for summer concerts - echoes the Teatro del Silenzio experience",
+          "review_summary": {
+            "total_reviews": 4336,
+            "what_guests_love": [
+              {"theme": "Atmospheric", "quote": "Even without knowing much about history, you can feel the atmosphere when standing among the ruins"},
+              {"theme": "Beautiful setting", "quote": "Well preserved ruins, now modernly converted to a concert and theatre stage. Beautiful and scenic route"},
+              {"theme": "Uncrowded", "quote": "So underrated and is free of Insta crowds. Refreshing and cute"}
+            ],
+            "negatives": [
+              {"issue": "Price concerns", "quote": "23 EUR to see some ruins is a joke. You can have a better view from the wall above it for free"}
+            ],
+            "practical_tips": [
+              "Included in Volterra Card or 10 EUR entry",
+              "Free views from the walls above",
+              "Still used for summer performances"
+            ],
+            "best_for": "History lovers, photographers, those interested in ancient Roman architecture",
+            "skip_if": "You're on a tight budget - views from above are free"
+          }
+        },
+        {
+          "id": "ChIJOe_85EQaKhMRK2LXl7VSwF4",
+          "name": "Porta all'Arco",
+          "rating": 4.7,
+          "rating_count": 419,
+          "address": "Via Porta all'Arco, 56048 Volterra PI",
+          "latitude": 43.4008747,
+          "longitude": 10.8583796,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Etruscan gateway from 4th century BC - one of Italy's oldest standing structures, saved from WWII destruction by brave citizens",
+          "review_summary": {
+            "total_reviews": 419,
+            "what_guests_love": [
+              {"theme": "Ancient history", "quote": "In the presence of 2,500 years of history - incredible to even see this"},
+              {"theme": "WWII story", "quote": "During World War II, the citizens of Volterra bravely protected the gate from destruction by filling it with stones"},
+              {"theme": "Scenic walk", "quote": "You get lovely views of the narrow streets but also the surrounding countryside"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Free to see - just walk through",
+              "A short stop is enough",
+              "Perfect photo opportunity"
+            ],
+            "best_for": "Everyone visiting Volterra - it's a must-see",
+            "skip_if": "N/A - takes only minutes to appreciate"
+          }
+        },
+        {
+          "id": "ChIJS2HiikMaKhMR5PEdzSWFPhQ",
+          "name": "Palazzo Incontri Viti",
+          "rating": 4.6,
+          "rating_count": 321,
+          "address": "Via dei Sarti, 41, 56048 Volterra PI",
+          "latitude": 43.402603,
+          "longitude": 10.8607841,
+          "price_level": null,
+          "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Private noble palace museum with original paintings, decoration and furniture - intimate glimpse into aristocratic Tuscan life",
+          "review_summary": {
+            "total_reviews": 321,
+            "what_guests_love": [
+              {"theme": "Hidden gem", "quote": "Ran into on a side street in Volterra. Very inexpensive to visit. Very interesting place! Brings you back in time to a luxurious home"},
+              {"theme": "Multilingual guides", "quote": "They have printed information in approx 12 languages, even Hungarian!"}
+            ],
+            "negatives": [
+              {"issue": "Cash only", "quote": "I'm shocked by the fact that this place is cash ONLY and the printed 'guides' must be at least 10 years old"}
+            ],
+            "practical_tips": [
+              "Bring cash - no card payments",
+              "Very inexpensive entry",
+              "Quick visit - 30-45 minutes"
+            ],
+            "best_for": "Those interested in aristocratic Italian history and interiors",
+            "skip_if": "You only have limited time in Volterra"
+          }
+        },
+        {
+          "id": "ChIJV4fVJ0QaKhMR4-xjibDmpwQ",
+          "name": "Parco Archeologico Enrico Fiumi",
+          "rating": 4.3,
+          "rating_count": 829,
+          "address": "Viale Wunsiedel, 56048 Volterra PI",
+          "latitude": 43.40063989999999,
+          "longitude": 10.8616766,
+          "price_level": null,
+          "types": ["park", "tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Archaeological park with Etruscan Acropolis ruins and scenic views over the Tuscan countryside",
+          "review_summary": {
+            "total_reviews": 829,
+            "what_guests_love": [
+              {"theme": "Historic ruins", "quote": "Fascinating piece of Roman history. Wonderful preserved pieces of history. Worth the 5 EUR each"},
+              {"theme": "Peaceful escape", "quote": "Nice quiet public park, hidden away at the top of the town. A welcome break from the bustle of the main tourist parts"},
+              {"theme": "Ancient temples", "quote": "Nice park with free admission. There is fenced Etruscan acropolis on the top where you can see bases of ancient buildings"}
+            ],
+            "negatives": [
+              {"issue": "Limited views", "quote": "Not much to see here. Trees in the area hide the best views of the countryside"},
+              {"issue": "Steep climb", "quote": "The main ascent from the town is quite steep but do-able"}
+            ],
+            "practical_tips": [
+              "Free admission to park, small fee for ruins",
+              "Good for a quiet break from tourist areas",
+              "Has playground for children",
+              "Visit the cistern and temples"
+            ],
+            "best_for": "History buffs, families with children, those seeking peaceful escape",
+            "skip_if": "You have limited mobility - steep climb required"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fine Dining & Tuscan Gastronomy",
+      "relevance": "The occasion calls for celebration-worthy dining. The region offers Michelin-starred restaurants, traditional trattorias famous for Chianina beef, and refined Tuscan cuisine.",
+      "search_queries": ["michelin restaurant", "fine dining", "gastronomic restaurant"],
+      "places": [
+        {
+          "id": "ChIJHRIqD-A6KhMRDnWRom_Tpgw",
+          "name": "Ristorante Arnolfo",
+          "rating": 4.8,
+          "rating_count": 713,
+          "address": "V.le della Rimembranza, 24, 53034 Colle di Val d'Elsa SI",
+          "latitude": 43.4238538,
+          "longitude": 11.1160617,
+          "price_level": 4,
+          "types": ["restaurant", "food", "point_of_interest", "establishment"],
+          "why_included": "2 Michelin star restaurant by Chef Gaetano Trovato - innovative tasting menus, stunning modern setting, once-in-a-lifetime dining",
+          "review_summary": {
+            "total_reviews": 713,
+            "what_guests_love": [
+              {"theme": "Exceptional artistry", "quote": "I can't even begin to describe the excellence. The food is innovative and creative, flavors are amazing and each course was presented beautifully"},
+              {"theme": "Personal touch", "quote": "Chef came to our table twice while we dined, and as we saw us rise to leave, he came by to shake our hands"},
+              {"theme": "Complete experience", "quote": "We started with nine amuse bouche, then the bread cart, four courses, cheese cart, two desserts, and five petit fours"}
+            ],
+            "negatives": [
+              {"issue": "Cheese upsell", "quote": "The cheese trolley came with little warning that it was extra cost - somewhat inappropriate at the table"}
+            ],
+            "practical_tips": [
+              "Reserve well in advance",
+              "Expect 500+ EUR for two with wine pairing",
+              "Allow 3+ hours for the full experience",
+              "Ask upfront what's included vs extra"
+            ],
+            "best_for": "Ultimate special occasions, foodies seeking Michelin-star excellence",
+            "skip_if": "Budget is a concern or you prefer casual dining"
+          }
+        },
+        {
+          "id": "ChIJf-5gScIZKhMR3xOvjzmbzUw",
+          "name": "Villa Pignano Restaurant - Stella Verde Michelin",
+          "rating": 4.3,
+          "rating_count": 34,
+          "address": "Loc. Pignano, 6, 56048 Volterra PI, Italy",
+          "latitude": 43.4163158,
+          "longitude": 10.96335,
+          "price_level": null,
+          "types": ["restaurant", "food", "point_of_interest", "establishment"],
+          "why_included": "Michelin Green Star for sustainability at Borgo Pignano estate - farm-to-table excellence using estate-grown ingredients, stunning views",
+          "review_summary": {
+            "total_reviews": 34,
+            "what_guests_love": [
+              {"theme": "Estate ingredients", "quote": "The restaurant's dedication to using ingredients from its own estate is evident in every dish"},
+              {"theme": "Romantic atmosphere", "quote": "We came here for an anniversary dinner and this place was so romantic, excellent service and impeccable food"},
+              {"theme": "Michelin quality", "quote": "An exceptional experience - one that would garner Michelin recognition in San Francisco, New York or Tuscany"}
+            ],
+            "negatives": [
+              {"issue": "Mixed opinions", "quote": "Very average food quality. Place to sit but not to eat (minority view)"}
+            ],
+            "practical_tips": [
+              "Reserve for dinner with views",
+              "Ask about wine pairings",
+              "Combine with spa day at Borgo Pignano"
+            ],
+            "best_for": "Sustainability-focused diners, those staying at or visiting Borgo Pignano",
+            "skip_if": "You prefer traditional rather than contemporary cuisine"
+          }
+        },
+        {
+          "id": "ChIJG-99QUQaKhMRPdDdBXJM1Ts",
+          "name": "Ristorante Enoteca Del Duca",
+          "rating": 4.6,
+          "rating_count": 574,
+          "address": "Via di Castello, 2, 56048 Volterra PI, Italy",
+          "latitude": 43.4011659,
+          "longitude": 10.8602249,
+          "price_level": 3,
+          "types": ["restaurant", "food", "point_of_interest", "establishment"],
+          "why_included": "Top fine dining in central Volterra - listed in Michelin Guide, beautiful courtyard setting against ancient walls, local ingredients",
+          "review_summary": {
+            "total_reviews": 574,
+            "what_guests_love": [
+              {"theme": "Intimate atmosphere", "quote": "The restaurant is beautiful merging with the ancient walls of the city, the garden in the back is an idyllic space"},
+              {"theme": "Personal service", "quote": "It feels like we came as guests and left as friends. Chef Fabio made sure we had an evening we will never forget"},
+              {"theme": "Quality ingredients", "quote": "The house special sausage was the best we ever had, bursting with flavor. All local, fresh ingredients"}
+            ],
+            "negatives": [
+              {"issue": "Appetizers", "quote": "The main dishes were stunning but the appetisers were lacking flavour"}
+            ],
+            "practical_tips": [
+              "Request the hidden courtyard for dinner",
+              "Try the boneless rabbit",
+              "More affordable than Michelin-starred options but excellent quality"
+            ],
+            "best_for": "Special dinners in Volterra, groups celebrating together",
+            "skip_if": "You want quick, casual dining"
+          }
+        },
+        {
+          "id": "ChIJL9fpAcA7KhMR1FGx7h0Py_k",
+          "name": "Barbagianni Fine Dining",
+          "rating": 5.0,
+          "rating_count": 153,
+          "address": "Via Gracco del Secco, 86, 53034 Colle di Val d'Elsa SI",
+          "latitude": 43.4212753,
+          "longitude": 11.113516,
+          "price_level": null,
+          "types": ["restaurant", "food", "point_of_interest", "establishment"],
+          "why_included": "Hidden gem with perfect 5.0 rating - exceptional tasting menus, outstanding service, excellent value for fine dining",
+          "review_summary": {
+            "total_reviews": 153,
+            "what_guests_love": [
+              {"theme": "Exceptional value", "quote": "I was shocked by the prices at first but once I tried the food it was 100% worth it"},
+              {"theme": "Outstanding service", "quote": "A special highlight was our wonderful waitress - incredibly kind, witty, and truly added to the warm, welcoming atmosphere"},
+              {"theme": "Culinary journey", "quote": "Almost 20 plates landed on our table, all unique and very very tasty"}
+            ],
+            "negatives": [
+              {"issue": "Adventurous menu", "quote": "While I personally did not like the taste of the pigeon, it was still a very impressive dish"}
+            ],
+            "practical_tips": [
+              "Reserve in advance",
+              "Choose the tasting menu for full experience",
+              "More accessible pricing than Arnolfo"
+            ],
+            "best_for": "Foodies seeking discovery, those wanting fine dining without pretension",
+            "skip_if": "You're a picky eater or prefer traditional dishes"
+          }
+        },
+        {
+          "id": "ChIJjSJu2z48KhMRNvEmFP0TU_E",
+          "name": "Il Ceppo Toscano",
+          "rating": 4.7,
+          "rating_count": 1435,
+          "address": "Via delle Romite, 13, 53037 San Gimignano SI",
+          "latitude": 43.4694147,
+          "longitude": 11.0430657,
+          "price_level": 3,
+          "types": ["restaurant", "food", "point_of_interest", "establishment"],
+          "why_included": "San Gimignano's premier steakhouse - specializes in premium Tuscan beef including Wagyu and Chianina, the beef the region is famous for",
+          "review_summary": {
+            "total_reviews": 1435,
+            "what_guests_love": [
+              {"theme": "Exceptional meat", "quote": "The steak was absolutely incredible. This place is certainly one of the best steakhouses"},
+              {"theme": "Tartare excellence", "quote": "The highlight was not the Florentine steak but the tartare - smoke flavour presentation was amazing"},
+              {"theme": "Meat focus", "quote": "To my fellow carnivores, prepare your taste buds for a pilgrimage! The dishes were a love letter from the kitchen to my plate"}
+            ],
+            "negatives": [
+              {"issue": "No tablecloths", "quote": "I don't think is appropriate for a restaurant to eat on a bare table without tablecloth"},
+              {"issue": "Risotto price", "quote": "The risotto although delicious I found it overpriced at 22 EUR"}
+            ],
+            "practical_tips": [
+              "Has 'No Pasta, Only Meat' sign on door",
+              "Try the beef tartare with smoke presentation",
+              "Good wine selection by glass"
+            ],
+            "best_for": "Meat lovers, those wanting the quintessential Tuscan steak experience",
+            "skip_if": "You're vegetarian or prefer lighter fare"
+          }
+        },
+        {
+          "id": "ChIJ-7LNezk8KhMRcCLQW7mdh9o",
+          "name": "Ristorante Fuoriluogo",
+          "rating": 4.8,
+          "rating_count": 1304,
+          "address": "Via Niccolo Cannicci, 2/a, 53037 San Gimignano SI",
+          "latitude": 43.4706887,
+          "longitude": 11.040231,
+          "price_level": 2,
+          "types": ["restaurant", "food", "point_of_interest", "establishment"],
+          "why_included": "Best value in San Gimignano - authentic local food cooked with genuine passion, outdoor seating, excellent quality-price ratio",
+          "review_summary": {
+            "total_reviews": 1304,
+            "what_guests_love": [
+              {"theme": "Best value", "quote": "The best value in San Gimignano by far. Authentic local food cooked with genuine passion"},
+              {"theme": "Fresh ingredients", "quote": "If you want fresh ingredients and delicious food, this is the place. Their legume vegetable soup is exceptional"},
+              {"theme": "Repeat worthy", "quote": "In my opinion, this was the best restaurant we tried in Tuscany. We went twice"}
+            ],
+            "negatives": [
+              {"issue": "Desserts", "quote": "Food was generally fantastic but the desserts were a let down"}
+            ],
+            "practical_tips": [
+              "Try the pulpo, pumpkin soup, cured meat and cheese board",
+              "Family-friendly with children",
+              "Less touristy location (not center)"
+            ],
+            "best_for": "Families, those seeking excellent value, authentic Tuscan cuisine",
+            "skip_if": "You want to be in the heart of the old town"
+          }
+        },
+        {
+          "id": "ChIJD2opQTk8KhMRm8DFjRtTsA8",
+          "name": "Cum Quibus - Ristorante Toscano",
+          "rating": 4.7,
+          "rating_count": 522,
+          "address": "Via S. Martino, 17, 53037 San Gimignano SI",
+          "latitude": 43.469891,
+          "longitude": 11.0416875,
+          "price_level": 4,
+          "types": ["restaurant", "food", "point_of_interest", "establishment"],
+          "why_included": "Refined Tuscan cuisine in San Gimignano with beautiful courtyard garden - recommended by locals as the best 'not too touristy' option",
+          "review_summary": {
+            "total_reviews": 522,
+            "what_guests_love": [
+              {"theme": "Local recommendation", "quote": "We asked in a jeweler-store where it would be best to eat. They immediately recommended this restaurant"},
+              {"theme": "Garden atmosphere", "quote": "Sitting outside in the yard felt like sitting at a friend's garden"},
+              {"theme": "Tasting menu", "quote": "We had the tasting menu with wine pairing and loved everything - food, wines, and service"}
+            ],
+            "negatives": [
+              {"issue": "Slow kitchen", "quote": "The kitchen was really slow (busy day?)"},
+              {"issue": "Wine pours", "quote": "Wine pours in the pairing could be a touch more generous"}
+            ],
+            "practical_tips": [
+              "Request courtyard seating",
+              "The cheese foam with egg yolk is a highlight",
+              "Vegetarian options available but limited (3 dishes)"
+            ],
+            "best_for": "Couples seeking romantic dinner, food enthusiasts",
+            "skip_if": "You're in a hurry or have extensive dietary restrictions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Artisanal Workshops & Volterra Crafts",
+      "relevance": "Volterra has been famous for alabaster craftsmanship since Etruscan times. Visiting workshops and artisan studios offers unique cultural immersion and meaningful souvenirs.",
+      "search_queries": ["alabaster workshop artisan", "craft workshop"],
+      "places": [
+        {
+          "id": "ChIJbSBfnUMaKhMR08zmjNgCkao",
+          "name": "Rossi Alabaster Volterra",
+          "rating": 4.4,
+          "rating_count": 87,
+          "address": "Piazzetta della Pescheria, 56048 Volterra PI",
+          "latitude": 43.4033094,
+          "longitude": 10.8589574,
+          "price_level": null,
+          "types": ["point_of_interest", "general_contractor", "store", "establishment"],
+          "why_included": "Premier alabaster cooperative with live demonstrations - see master craftsmen at work on the lathe, wide range from 3 EUR to 3,500 EUR",
+          "review_summary": {
+            "total_reviews": 87,
+            "what_guests_love": [
+              {"theme": "Live demonstrations", "quote": "A good visit with lathe turning of the calcium sulphate stone"},
+              {"theme": "Range of items", "quote": "Their selection comes from multiple different artists. You can find anything from 3 EUR to 3,500 EUR"},
+              {"theme": "Shipping service", "quote": "The owner was very friendly and shipped our items back to the USA. They arrived about 3 days after we got home"}
+            ],
+            "negatives": [
+              {"issue": "Sales pitch", "quote": "Yes, it is a sales pitch, but I appreciated the demonstration"}
+            ],
+            "practical_tips": [
+              "Workshop is next door to shop",
+              "Leave a euro or two for the artist demonstrating",
+              "They ship internationally",
+              "Has a bathroom (useful for tourists)"
+            ],
+            "best_for": "Anyone interested in local crafts, those wanting authentic souvenirs",
+            "skip_if": "You're not interested in shopping or demonstrations"
+          }
+        },
+        {
+          "id": "ChIJReN1WUMaKhMRMysT2InJQ7U",
+          "name": "Alabastri Sarperi",
+          "rating": 4.9,
+          "rating_count": 21,
+          "address": "Via S. Lino, 14, 56048 Volterra PI",
+          "latitude": 43.4033704,
+          "longitude": 10.8571356,
+          "price_level": null,
+          "types": ["jewelry_store", "point_of_interest", "general_contractor", "store", "establishment"],
+          "why_included": "Family artisan shop since 1920 - authentic handcrafted pieces, beautiful jewelry, cozy atmosphere, avoids 'tourist trap' feel",
+          "review_summary": {
+            "total_reviews": 21,
+            "what_guests_love": [
+              {"theme": "Authentic craftsmanship", "quote": "Beautiful handcrafted items, friendly owner - recommend buying here instead of the kitsch tourist traps"},
+              {"theme": "Unique souvenirs", "quote": "Volterra is famous for alabaster. This piece now has a special place in my home and heart"},
+              {"theme": "Reasonable prices", "quote": "Beautiful jewelry, reasonable price"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Family-run since 1920",
+              "Specializes in jewelry and smaller pieces",
+              "More intimate than larger cooperatives"
+            ],
+            "best_for": "Those seeking authentic, personal shopping experience and quality jewelry",
+            "skip_if": "You want to see demonstrations (go to Rossi instead)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wellness & Tuscan Relaxation",
+      "relevance": "After a magical evening concert, luxury spa experiences offer perfect relaxation. Borgo Pignano's spa is closest to Lajatico, with thermal springs further in Val d'Orcia.",
+      "search_queries": ["spa wellness", "thermal springs"],
+      "places": [
+        {
+          "id": "ChIJh1Z65h0YKhMRC0TaGk3eqBs",
+          "name": "Borgo Pignano",
+          "rating": 4.8,
+          "rating_count": 302,
+          "address": "Localita' Pignano, 6, 56048 Volterra PI",
+          "latitude": 43.4156328,
+          "longitude": 10.963839,
+          "price_level": null,
+          "types": ["art_gallery", "spa", "lodging", "point_of_interest", "establishment"],
+          "why_included": "800-acre luxury estate with private spa (sauna, steam room, pools), cooking classes, wine tastings - closest premium wellness to Lajatico",
+          "review_summary": {
+            "total_reviews": 302,
+            "what_guests_love": [
+              {"theme": "Magical property", "quote": "We were welcomed with sparkling rose and the warmest environment. The grounds, room, food, and most importantly the staff were absolutely amazing"},
+              {"theme": "Private spa", "quote": "We had so much fun making reservations at the sauna and steam room which felt like our own private spa oasis"},
+              {"theme": "Family feeling", "quote": "Gigi and the team made us feel like family the whole trip. We'll definitely be back"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Book spa sessions in advance",
+              "Cooking classes available on property",
+              "Wine tastings with stunning views",
+              "Golf cart provided to navigate estate"
+            ],
+            "best_for": "Luxury seekers, couples, honeymoons, those wanting complete relaxation",
+            "skip_if": "Budget is a concern - this is premium pricing"
+          }
+        },
+        {
+          "id": "ChIJ34lcNUUXKhMRCvpAutCwrD8",
+          "name": "Country Relais & Spa Le Capanne",
+          "rating": 4.8,
+          "rating_count": 64,
+          "address": "Localita Ulignano, 56048 Volterra PI",
+          "latitude": 43.43134329999999,
+          "longitude": 10.9030677,
+          "price_level": null,
+          "types": ["spa", "lodging", "point_of_interest", "establishment"],
+          "why_included": "Boutique farmhouse with the most breathtaking sunset views in Tuscany - intimate villa experience with spa facilities",
+          "review_summary": {
+            "total_reviews": 64,
+            "what_guests_love": [
+              {"theme": "Stunning sunsets", "quote": "This venue offers what we believe are the most breathtaking sunset views in all of Tuscany"},
+              {"theme": "Exceptional hosts", "quote": "Vera and Dario are so good at this and make you feel at ease right away"},
+              {"theme": "Authentic atmosphere", "quote": "Beautiful converted farmhouse in the Tuscan hills. Spacious and very well appointed. Great host provides a rare level of service"}
+            ],
+            "negatives": [
+              {"issue": "Access road", "quote": "The road up to the property was a little treacherous"}
+            ],
+            "practical_tips": [
+              "Popular wedding venue - book well ahead",
+              "Dario's family are renowned local caterers",
+              "Best for couples or small groups"
+            ],
+            "best_for": "Romantic getaways, sunset lovers, those wanting intimate villa experience",
+            "skip_if": "You need full resort amenities"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wine Bars & Aperitivo",
+      "relevance": "Evening aperitivo culture is essential in Italy. Volterra offers charming wine bars perfect for pre-dinner drinks or post-concert wind-down.",
+      "search_queries": ["wine bar", "enoteca"],
+      "places": [
+        {
+          "id": "ChIJM-ja5kYaKhMRmHASxWMsdDM",
+          "name": "La Vena di Vino",
+          "rating": 4.8,
+          "rating_count": 285,
+          "address": "Via Don Giovanni Minzoni, 30, 56048 Volterra PI, Italy",
+          "latitude": 43.4007028,
+          "longitude": 10.864472,
+          "price_level": 1,
+          "types": ["bar", "point_of_interest", "establishment"],
+          "why_included": "Charming local wine bar specializing in house-made gin cocktails and excellent wines - eclectic decor, warm atmosphere",
+          "review_summary": {
+            "total_reviews": 285,
+            "what_guests_love": [
+              {"theme": "Unique cocktails", "quote": "If Martinis, negronis and other bitters are your favorite drink, this place is a must visit. Wonderful selection with flavours you haven't encountered"},
+              {"theme": "Cozy atmosphere", "quote": "Very cool little tavern. The space is very small but super charming and so is the staff"},
+              {"theme": "Quality wines", "quote": "Very nice wines especially the Brunello di Montalcino should be tasted. Extremely friendly owners"}
+            ],
+            "negatives": [
+              {"issue": "Tourist focus", "quote": "Touristic place pumping out cheap music hits at impossibly loud volumes (minority view)"}
+            ],
+            "practical_tips": [
+              "Try their house-made Vermouth, Gin and Bitter for a special Negroni",
+              "Good cheese and small dishes available",
+              "They ship internationally"
+            ],
+            "best_for": "Cocktail lovers, those seeking local atmosphere, evening drinks",
+            "skip_if": "You want a quiet, intimate setting"
+          }
+        },
+        {
+          "id": "ChIJKcV_pl0aKhMRlEpVfQ8mWpE",
+          "name": "La Cantina di Fabio",
+          "rating": 4.8,
+          "rating_count": 113,
+          "address": "Borgo Santo Stefano, 113, 56048 Volterra PI, Italy",
+          "latitude": 43.4062756,
+          "longitude": 10.8532694,
+          "price_level": null,
+          "types": ["liquor_store", "store", "point_of_interest", "food", "establishment"],
+          "why_included": "Local wine shop with tastings - excellent selection of Tuscan wines, personal recommendations, authentic neighborhood feel",
+          "review_summary": {
+            "total_reviews": 113,
+            "what_guests_love": [
+              {"theme": "Personal service", "quote": "Fabio provides excellent personal recommendations and takes time to explain each wine"},
+              {"theme": "Authentic experience", "quote": "Not touristy at all - this is where locals buy their wine"},
+              {"theme": "Great selection", "quote": "Excellent selection of local Tuscan wines at reasonable prices"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Ask Fabio for personalized recommendations",
+              "Can taste before buying",
+              "Ships wine if needed"
+            ],
+            "best_for": "Wine enthusiasts wanting local recommendations, those avoiding tourist spots",
+            "skip_if": "You want a formal wine tasting experience"
+          }
+        },
+        {
+          "id": "ChIJb5MFs8MbKhMRxzqXTapzgh0",
+          "name": "Antica Velathri Cafe",
+          "rating": 4.8,
+          "rating_count": 353,
+          "address": "Vicolo Ormanni, 3, 56048 Volterra PI, Italy",
+          "latitude": 43.401056,
+          "longitude": 10.8628687,
+          "price_level": 2,
+          "types": ["bar", "point_of_interest", "establishment"],
+          "why_included": "Historic cafe in Volterra's center - perfect for aperitivo with local wines and cocktails",
+          "review_summary": {
+            "total_reviews": 353,
+            "what_guests_love": [
+              {"theme": "Artisan cocktails", "quote": "This man is an artist. There is no other way to describe it. He modified my cocktail using different types of gin to bring out what I asked for"},
+              {"theme": "Best in Tuscany", "quote": "I've spent two weeks across Tuscany and this might be the most amazing place I visited. We came back multiple times"},
+              {"theme": "Exceptional presentation", "quote": "Amazing bar and cafe. The drinks are superb and the detail in the drink presentation is fantastic"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Owner crafts personalized cocktails",
+              "Also serves excellent coffee and pastries",
+              "Regulars return year after year"
+            ],
+            "best_for": "Cocktail aficionados, those seeking exceptional mixology",
+            "skip_if": "You just want a simple drink - this is an experience"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tours & Local Experiences",
+      "relevance": "Guided experiences enhance understanding of the region. Wine tours, walking tours, and cooking classes offer deeper cultural immersion.",
+      "search_queries": ["tour agency", "walking tour", "cooking class"],
+      "places": [
+        {
+          "id": "ChIJqzfX33oMKhMRMzPmWURuVnU",
+          "name": "Arianna & Friends - Wine and Food Tours",
+          "rating": 4.8,
+          "rating_count": 106,
+          "address": "Via Salaiola, 50/10 Localita, 56030 La Rosa PI, Italy",
+          "latitude": 43.5411191,
+          "longitude": 10.7031208,
+          "price_level": null,
+          "types": ["point_of_interest", "establishment"],
+          "why_included": "Premier local tour company offering wine tours, cooking classes, and village experiences - highly personalized, family-friendly",
+          "review_summary": {
+            "total_reviews": 106,
+            "what_guests_love": [
+              {"theme": "Personalized service", "quote": "Arianna & Friends were very helpful in planning the appropriate trip to fit our group including kids as young as 2"},
+              {"theme": "Memorable experiences", "quote": "In recalling our favorite day in our 12-day stay in Italy, this wine and village tour was mentioned again and again"},
+              {"theme": "Professional team", "quote": "From the very beginning, the team was incredibly thoughtful and professional. Each of us received our own booklet and keepsake apron"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Book well in advance",
+              "Great for multi-generational groups",
+              "They can come to your accommodation",
+              "Cooking classes, wine tours, village tours available"
+            ],
+            "best_for": "Families, groups, those wanting customized experiences",
+            "skip_if": "You prefer independent exploration"
+          }
+        },
+        {
+          "id": "ChIJ87iB-2QbKhMRuDVkT0ryC4U",
+          "name": "Volterra Walking Tour",
+          "rating": 5.0,
+          "rating_count": 15,
+          "address": "Piazza Martiri della Liberta, 5, 56048 Volterra PI, Italy",
+          "latitude": 43.4011952,
+          "longitude": 10.8597055,
+          "price_level": null,
+          "types": ["tourist_attraction", "travel_agency", "point_of_interest", "establishment"],
+          "why_included": "Daily 1-hour tours in English - passionate local guides share Etruscan, Roman, and medieval history of Volterra",
+          "review_summary": {
+            "total_reviews": 15,
+            "what_guests_love": [
+              {"theme": "Passionate guides", "quote": "By far, the highlight was the one hour walking tour led by Annie Adair. She passionately wove together threads of history, geology, art, and her love of her adopted home"},
+              {"theme": "Great value", "quote": "Best ten Euros I have ever spent"},
+              {"theme": "Personal stories", "quote": "I especially appreciated her personal anecdote about her husband's aunt's participation in saving the last remaining Etruscan gate from destruction"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "10 EUR per person",
+              "1 hour duration",
+              "Daily tours available in English",
+              "Multiple guide options including Franz (German/French/English)"
+            ],
+            "best_for": "History lovers, first-time visitors to Volterra, anyone wanting context",
+            "skip_if": "You prefer self-guided exploration"
+          }
+        },
+        {
+          "id": "ChIJrz26lDzNoqIRiLaCOLpPciI",
+          "name": "CicloToscana - Premium E-Bike Tours and Rental",
+          "rating": 5.0,
+          "rating_count": 115,
+          "address": "Via Podernuovo, 2, 56030 Terricciola PI, Italy",
+          "latitude": 43.5342118,
+          "longitude": 10.6651493,
+          "price_level": null,
+          "types": ["travel_agency", "point_of_interest", "establishment"],
+          "why_included": "E-bike tours through Tuscan hills - perfect for active exploration of the countryside around Lajatico in summer",
+          "review_summary": {
+            "total_reviews": 115,
+            "what_guests_love": [
+              {"theme": "Stunning routes", "quote": "Spectacular views of Tuscan countryside. E-bikes make the hills manageable for everyone"},
+              {"theme": "Professional service", "quote": "Well-maintained bikes and excellent route planning through vineyards and villages"},
+              {"theme": "Local knowledge", "quote": "Guides know the best hidden spots and stop at local producers for tastings"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "E-bikes make hills accessible for all fitness levels",
+              "Tours include wine/food stops",
+              "Book in advance for July"
+            ],
+            "best_for": "Active travelers, those wanting to explore countryside at leisure",
+            "skip_if": "July heat is too intense for you - tours start early to avoid midday heat"
+          }
+        }
+      ]
+    },
+    {
+      "name": "San Gimignano Medieval Towers",
+      "relevance": "The famous 'Medieval Manhattan' with its 14 remaining towers is just 30 minutes from Lajatico - a must-visit for any Tuscany trip.",
+      "search_queries": ["San Gimignano tower", "medieval"],
+      "places": [
+        {
+          "id": "ChIJZRHOMj88KhMRD1hj-5VraHc",
+          "name": "Palazzo Comunale, Pinacoteca, Torre Grossa",
+          "rating": 4.6,
+          "rating_count": 1263,
+          "address": "Piazza Duomo, 2, 53037 San Gimignano SI",
+          "latitude": 43.4676264,
+          "longitude": 11.0431188,
+          "price_level": null,
+          "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Climb the tallest tower in San Gimignano for panoramic views over the Tuscan countryside and the famous medieval towers",
+          "review_summary": {
+            "total_reviews": 1263,
+            "what_guests_love": [
+              {"theme": "Breathtaking views", "quote": "The views are breathtaking! A great place to visit when in San Gimignano"},
+              {"theme": "Easy climb", "quote": "They have redone the stairs so it's quite an easy walk up. The views are definitely worth it"},
+              {"theme": "Great value", "quote": "Buy tickets in full city pass. Tower, tower museum and museum next to tower all costs only 15 EUR"}
+            ],
+            "negatives": [
+              {"issue": "Low ceilings", "quote": "If you are tall you will need to duck your head at the end"}
+            ],
+            "practical_tips": [
+              "Go early at 10am when it opens to avoid crowds",
+              "Full city pass is great value at 15 EUR",
+              "Includes access to museum",
+              "Tallest climbable tower in San Gimignano"
+            ],
+            "best_for": "Everyone visiting San Gimignano - the essential viewpoint",
+            "skip_if": "You have mobility issues or fear of heights"
+          }
+        },
+        {
+          "id": "ChIJ0XqMSz88KhMRTYXNcAw77O8",
+          "name": "Torre e Casa Campatelli",
+          "rating": 4.6,
+          "rating_count": 766,
+          "address": "Via S. Giovanni, 15, 53037 San Gimignano SI",
+          "latitude": 43.4667718,
+          "longitude": 11.042967,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Historic tower-house museum showing life in a medieval San Gimignano tower with multimedia experience",
+          "review_summary": {
+            "total_reviews": 766,
+            "what_guests_love": [
+              {"theme": "Living history", "quote": "You can live the town's history through the stories told by the objects in this preserved home"},
+              {"theme": "Excellent documentary", "quote": "The film on the top floor about history of San Gimignano was super interesting"},
+              {"theme": "Unique experience", "quote": "When all the tourists are walking around just watching towers this is the place where you can really go back in time"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "No wait or lines typically",
+              "Beautiful countryside views from balcony",
+              "FAI property - well maintained"
+            ],
+            "best_for": "Those wanting to understand medieval tower life, history enthusiasts",
+            "skip_if": "You only want exterior views and photos"
+          }
+        },
+        {
+          "id": "ChIJyQrFNUc8KhMRhRT20uC_yzM",
+          "name": "Porta San Giovanni",
+          "rating": 4.7,
+          "rating_count": 2344,
+          "address": "Via S. Giovanni, 126, 53037 San Gimignano SI",
+          "latitude": 43.4647539,
+          "longitude": 11.0426247,
+          "price_level": null,
+          "types": ["tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Main entrance gate to San Gimignano - where the iconic tower skyline reveals itself",
+          "review_summary": {
+            "total_reviews": 2344,
+            "what_guests_love": [
+              {"theme": "Iconic first impression", "quote": "Walking through the gate and seeing the medieval towers rise up is unforgettable"},
+              {"theme": "Beautiful architecture", "quote": "Impressive 13th-century gate that sets the tone for the whole visit"},
+              {"theme": "Perfect photos", "quote": "The best place to capture the famous San Gimignano tower skyline"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Free to walk through",
+              "Parking nearby outside the walls",
+              "Main pedestrian entrance to the old town"
+            ],
+            "best_for": "Everyone - you'll enter through here anyway",
+            "skip_if": "N/A - this is the main entrance"
+          }
+        },
+        {
+          "id": "ChIJwW-zsjg8KhMRKMThAu47J6w",
+          "name": "SanGimignano1300",
+          "rating": 4.8,
+          "rating_count": 321,
+          "address": "Via Costarella, 3, 53037 San Gimignano SI",
+          "latitude": 43.4672962,
+          "longitude": 11.0427266,
+          "price_level": null,
+          "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+          "why_included": "Museum with detailed scale model of San Gimignano as it appeared in 1300 with all 72 original towers",
+          "review_summary": {
+            "total_reviews": 321,
+            "what_guests_love": [
+              {"theme": "Impressive scale model", "quote": "Very cool model of the entire San Gimignano village. Helps you get a feel for the scope and explains the tower houses"},
+              {"theme": "Free entry", "quote": "The museum is free. Bombastic miniature version of the city from around 1300 - impressive because it comes very close to current state"},
+              {"theme": "Family-friendly", "quote": "My 7 year old thought it was very cool. So detailed and well done"}
+            ],
+            "negatives": [],
+            "practical_tips": [
+              "Free admission (donation appreciated)",
+              "Off the main tourist road - less crowded",
+              "Gift shop with souvenirs",
+              "Quick visit - 15-20 minutes"
+            ],
+            "best_for": "Families, history enthusiasts, anyone wanting context for the town",
+            "skip_if": "You're not interested in scale models"
+          }
+        }
+      ]
+    }
+  ],
+  "total_places": 47,
+  "generated_at": "2025-12-28T23:50:00Z"
+}

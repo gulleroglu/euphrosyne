@@ -1,0 +1,365 @@
+{
+  "occasion_description": "The Teatro del Silenzio is a natural amphitheater created in the beautiful setting of the Lajatico hills, born from the vision of Maestro Andrea Bocelli and architect Alberto Bartalini. For the rest of the year it lives up to its name - the stage transforms into a lake with a central platform where rotating sculptures are exhibited. A \"silent\" project, the space remains intact in its perfect harmony for almost a whole year, living for just a few days with national and international stars of bel canto, music, and dance. This part of Tuscany sits almost outside mass tourism routes - rolling wheat fields, gentle hillsides, and absolute tranquility. Tuscany delivers beyond the concert. The region offers Chianina beef - Italy's finest steak - best experienced in Val d'Orcia trattorias. Drive the Chianti Classico wine route between Florence and Siena. San Gimignano's towers are 30 minutes away.",
+  "search_location": {
+    "type": "coordinates",
+    "latitude": 43.4688507,
+    "longitude": 10.7384856,
+    "full_address": "Teatro del Silenzio, Lajatico, Tuscany, Italy",
+    "city": "Lajatico",
+    "country": "IT",
+    "radius_km": 25
+  },
+  "search_criteria": {
+    "min_rating": 8.0,
+    "min_reviews": 100
+  },
+  "hotels": [
+    {
+      "id": "lp98c79",
+      "name": "Castelfalfi",
+      "stars": 5,
+      "rating": 9.4,
+      "rating_count": 255,
+      "address": "Loc. Castelfalfi",
+      "city": "Castelfalfi",
+      "country": "IT",
+      "latitude": 43.548516,
+      "longitude": 10.856961,
+      "main_photo": "https://static.cupid.travel/hotels/445149509.jpg",
+      "review_summary": {
+        "overall_score": 9.4,
+        "total_reviews": 255,
+        "highlights": [
+          {"score": 10, "guest": "Jose", "type": "Couples", "headline": "Proposal at Castelfalfi was magical"},
+          {"score": 10, "guest": "Sierra", "type": "Solo", "headline": "Tucked away paradise in Tuscany"},
+          {"score": 10, "guest": "Kelly (USA)", "type": "Family", "headline": "Best property I have ever seen"},
+          {"score": 10, "guest": "Arelys", "type": "Guest", "headline": "Excellent stay - world-class service"}
+        ],
+        "what_guests_love": [
+          {"theme": "Views", "quote": "The views of the rolling Tuscan hills are absolutely unparalleled - a scene straight out of a dream"},
+          {"theme": "Service", "quote": "Benjamin went above and beyond to ensure we felt welcomed - every staff member was exceptional"},
+          {"theme": "Wine Experience", "quote": "The wine tasting in their beautiful underground cellar was incredible"},
+          {"theme": "Dining", "quote": "The Bistecca alla Fiorentina was cooked to perfection - juicy, tender, full of flavor"},
+          {"theme": "Spa", "quote": "The spa is beautiful and the massages are so professional and well done"}
+        ],
+        "what_to_know": [
+          {"concern": "Remote Location", "quote": "This property is remote which means there are not a lot of food options nearby"},
+          {"concern": "Price Point", "quote": "Premium rates but hands down the best property - worth every euro"}
+        ],
+        "guest_types": "Mostly couples and families from USA, Europe. Popular for proposals and special occasions."
+      }
+    },
+    {
+      "id": "lp47122",
+      "name": "Hotel La Locanda",
+      "stars": 4,
+      "rating": 8.9,
+      "rating_count": 1888,
+      "address": "Via Guarnacci 24/28",
+      "city": "Volterra",
+      "country": "IT",
+      "latitude": 43.403348,
+      "longitude": 10.861439,
+      "main_photo": "https://static.cupid.travel/hotels/156582811.jpg",
+      "review_summary": {
+        "overall_score": 8.9,
+        "total_reviews": 1888,
+        "highlights": [
+          {"score": 10, "guest": "Maria Carmen (Spain)", "type": "Group", "headline": "Acogedor, perfecta ubicacion y trato genial!"},
+          {"score": 9, "guest": "Marilia (Greece)", "type": "Couples", "headline": "All you need right in the center of Volterra"},
+          {"score": 9, "guest": "Martina (Italy)", "type": "Couples", "headline": "Soggiorno perfetto, staff super disponibile"}
+        ],
+        "what_guests_love": [
+          {"theme": "Location", "quote": "Perfect location right in the center of Volterra, inside the walled city"},
+          {"theme": "Rooms", "quote": "Beautiful rooms with jacuzzi bath - spacious and high quality"},
+          {"theme": "Breakfast", "quote": "Varied and abundant breakfast with local honey"},
+          {"theme": "Staff", "quote": "Super helpful staff, even with our baby - they made us feel at home"}
+        ],
+        "what_to_know": [
+          {"concern": "Soundproofing", "quote": "Walls are not very soundproofed - could hear neighbors"},
+          {"concern": "Mattresses", "quote": "Mattresses are extremely firm as is typical in Italy"},
+          {"concern": "Twin Beds", "quote": "Some double rooms have twin beds that separate during the night"}
+        ],
+        "guest_types": "Mostly couples from Italy, Spain, Greece, Brazil. Popular with international travelers exploring Volterra."
+      }
+    },
+    {
+      "id": "lp6570ab7a",
+      "name": "B&B La Cornice",
+      "stars": 0,
+      "rating": 9.7,
+      "rating_count": 675,
+      "address": "4 Via Don Minzoni",
+      "city": "San Gimignano",
+      "country": "IT",
+      "latitude": 43.462168,
+      "longitude": 11.036767,
+      "main_photo": "https://static.cupid.travel/hotels/477300268.jpg",
+      "review_summary": {
+        "overall_score": 9.7,
+        "total_reviews": 675,
+        "highlights": [
+          {"score": 10, "guest": "Kimberley (Canada)", "type": "Couples", "headline": "Lovely stay with beautiful views of San Gimignano"},
+          {"score": 10, "guest": "Katharina (Germany)", "type": "Couples", "headline": "Megaschoner Blick beim Fruhstuck auf San Gimignano"},
+          {"score": 10, "guest": "Zsofia (Hungary)", "type": "Family", "headline": "The best place I have ever stayed"}
+        ],
+        "what_guests_love": [
+          {"theme": "Views", "quote": "Beautiful view of San Gimignano towers from breakfast terrace - absolutely stunning"},
+          {"theme": "Breakfast", "quote": "Freshly prepared breakfast with the most delicious homemade tiramisu"},
+          {"theme": "Host", "quote": "Benedetta is a truly warm and gracious host - morning chats were wonderful"},
+          {"theme": "Apartment", "quote": "Spacious apartment with beautiful garden, spotless and comfortable beds"}
+        ],
+        "what_to_know": [
+          {"concern": "Walking Distance", "quote": "Located outside the walls, 10-15 minute walk to San Gimignano center"},
+          {"concern": "Parking", "quote": "Private parking available but paid - worth it to secure a spot"},
+          {"concern": "No Kettle", "quote": "No water heater in room - need to use common kitchen for hot water"}
+        ],
+        "guest_types": "Mostly couples and families from Germany, Canada, Italy, Hungary. Popular with those seeking authentic Tuscan B&B experience."
+      }
+    },
+    {
+      "id": "lpac34d",
+      "name": "Podere Bellavista",
+      "stars": 0,
+      "rating": 9.7,
+      "rating_count": 423,
+      "address": "localita racciano 43",
+      "city": "San Gimignano",
+      "country": "IT",
+      "latitude": 43.461437,
+      "longitude": 11.027145,
+      "main_photo": "https://static.cupid.travel/hotels/449945306.jpg",
+      "review_summary": {
+        "overall_score": 9.7,
+        "total_reviews": 423,
+        "highlights": [
+          {"score": 10, "guest": "Forbes (Canada)", "type": "Couples", "headline": "Best introduction possible to the charming Tuscan countryside"},
+          {"score": 10, "guest": "Lee Ly (French Polynesia)", "type": "Family", "headline": "Parfait - Le calme, la tres belle vue"},
+          {"score": 10, "guest": "Mats (Sweden)", "type": "Couples", "headline": "En fantastisk upplevelse - choose to eat dinner here every night!"}
+        ],
+        "what_guests_love": [
+          {"theme": "Setting", "quote": "Felt like we were in the middle of a painting of sunlit Tuscany with rolling hills and olive groves"},
+          {"theme": "Dining", "quote": "Chef-prepared five-course tasting menu was exceptional - different every night with fresh local ingredients"},
+          {"theme": "Service", "quote": "Super friendly staff with humour - his wine suggestions were always brilliant"},
+          {"theme": "Pool", "quote": "Roses around the swimming pool, pomegranate trees, cypress-lined roads to San Gimignano"},
+          {"theme": "Olive Oil", "quote": "Wonderful olive oil made from their locally grown olives - smell of fresh bread baking"}
+        ],
+        "what_to_know": [
+          {"concern": "Mattresses", "quote": "As often in Italy, beds are hard - could use thicker mattress topper"},
+          {"concern": "Shower", "quote": "Shower cubicle is quite small"},
+          {"concern": "Seasonal Insects", "quote": "Ladybugs on walls during autumn season"}
+        ],
+        "guest_types": "Mostly couples from Canada, Germany, Sweden, UK. Perfect for food and wine lovers seeking authentic agriturismo experience."
+      }
+    },
+    {
+      "id": "lp5f71d",
+      "name": "Le Sodole Country Resort & Golf",
+      "stars": 4,
+      "rating": 9.0,
+      "rating_count": 484,
+      "address": "Via Delle Sodole 1",
+      "city": "Pontedera",
+      "country": "IT",
+      "latitude": 43.651144,
+      "longitude": 10.677267,
+      "main_photo": "https://static.cupid.travel/hotels/154296165.jpg",
+      "review_summary": {
+        "overall_score": 9.0,
+        "total_reviews": 484,
+        "highlights": [
+          {"score": 10, "guest": "Raymond", "type": "Couples", "headline": "Perfect for attending the Theater of Silence"},
+          {"score": 10, "guest": "Jorgen (Norway)", "type": "Guest", "headline": "Got upgraded room, lovely surroundings, super service"},
+          {"score": 10, "guest": "Oliver", "type": "Family", "headline": "Great value - nice property in the middle of vineyards"}
+        ],
+        "what_guests_love": [
+          {"theme": "Teatro del Silenzio", "quote": "Definitely off the beaten path, very nice for attending the Theater of Silence"},
+          {"theme": "Location", "quote": "Great value property in the middle of vineyards, good for day trips to Florence, Pisa, Lucca"},
+          {"theme": "Wine", "quote": "Beautiful winery with tastings available - we loved the Chianti here"},
+          {"theme": "Restaurant", "quote": "Complimenti al cuoco! Typical Tuscan with a touch of modernity"},
+          {"theme": "Pool", "quote": "Wonderful pool and fantastic opportunities to explore all of Tuscany"}
+        ],
+        "what_to_know": [
+          {"concern": "Access Road", "quote": "Drive carefully on the access road - quite narrow with a ditch alongside"},
+          {"concern": "Private Outdoor Space", "quote": "Few rooms have terrace, others don't - ask for room with outdoor area"},
+          {"concern": "Car Needed", "quote": "Beautiful and quiet but definitely need a car to get around"}
+        ],
+        "guest_types": "Mostly couples and families from Scandinavia, Germany, Italy. Ideal base for Teatro del Silenzio concert-goers."
+      }
+    },
+    {
+      "id": "lp46d30",
+      "name": "Hotel San Lino",
+      "stars": 4,
+      "rating": 8.5,
+      "rating_count": 1444,
+      "address": "Via San Lino 26",
+      "city": "Volterra",
+      "country": "IT",
+      "latitude": 43.403908,
+      "longitude": 10.856568,
+      "main_photo": "https://static.cupid.travel/hotels/397554584.jpg",
+      "review_summary": {
+        "overall_score": 8.5,
+        "total_reviews": 1444,
+        "highlights": [
+          {"score": 10, "guest": "Aniel (USA)", "type": "Couples", "headline": "Will stay again - great location, amazing staff"},
+          {"score": 10, "guest": "Lisa (Italy)", "type": "Couples", "headline": "Hotel in centro a Volterra - staff suggested excellent local restaurant"}
+        ],
+        "what_guests_love": [
+          {"theme": "Location", "quote": "Right inside the walls of Volterra with convenient private parking garage"},
+          {"theme": "Staff", "quote": "Super friendly staff who suggested excellent local restaurants for typical dishes"},
+          {"theme": "Breakfast", "quote": "Large breakfast buffet with local honey"}
+        ],
+        "what_to_know": [
+          {"concern": "Dated Decor", "quote": "Structure needs renovation - rooms feel dated for a 4-star"},
+          {"concern": "Bathrooms", "quote": "Bathrooms are small and old, noisy toilet cistern"},
+          {"concern": "Soundproofing", "quote": "No soundproofing between rooms"},
+          {"concern": "Variable Quality", "quote": "Some guests report excellent experience, others note need for refurbishment"}
+        ],
+        "guest_types": "Mostly couples from Italy, USA, Switzerland. Good for those prioritizing central Volterra location over modern amenities."
+      }
+    },
+    {
+      "id": "lp39d86",
+      "name": "Villasanpaolo Resort & Spa",
+      "stars": 4,
+      "rating": 8.6,
+      "rating_count": 525,
+      "address": "Strada Provinciale Per Certaldo",
+      "city": "San Gimignano",
+      "country": "IT",
+      "latitude": 43.492063,
+      "longitude": 11.020666,
+      "main_photo": "https://static.cupid.travel/hotels/590578162.jpg",
+      "review_summary": {
+        "overall_score": 8.6,
+        "total_reviews": 525,
+        "highlights": [
+          {"score": 10, "guest": "Juan Carlos (Spain)", "type": "Couples", "headline": "Formidable - incredible views, perfect for romantic getaway"},
+          {"score": 10, "guest": "Karina (Brazil)", "type": "Guest", "headline": "Well located with great value"},
+          {"score": 10, "guest": "Bjarki", "type": "Couples", "headline": "Very nice hotel - hope to stay again"}
+        ],
+        "what_guests_love": [
+          {"theme": "Views", "quote": "Incredibly quiet with spectacular views over the valley - dream location"},
+          {"theme": "Spa & Pool", "quote": "Indoor spa made up for remote location - lovely pool area"},
+          {"theme": "Restaurant", "quote": "Good dinner and breakfast in restaurant with lovely views"},
+          {"theme": "Staff", "quote": "Front desk staff especially Alberto very helpful and friendly"}
+        ],
+        "what_to_know": [
+          {"concern": "Spa Fees", "quote": "Extra 25 EUR per adult for spa facilities - not included in room rate"},
+          {"concern": "Room Decor", "quote": "Rooms and furniture dated for the price - need modernization"},
+          {"concern": "Remote", "quote": "On a hill via winding road, not walkable to anything - car essential"},
+          {"concern": "Twin Bed Issues", "quote": "One family was given double beds instead of requested twins - verify booking"}
+        ],
+        "guest_types": "Mostly couples from Spain, Brazil, Scandinavia. Good for those seeking spa facilities near San Gimignano."
+      }
+    },
+    {
+      "id": "lp65626ba1",
+      "name": "Affittacamere Mainardi 16",
+      "stars": 0,
+      "rating": 9.5,
+      "rating_count": 472,
+      "address": "16 Via Mainardi",
+      "city": "San Gimignano",
+      "country": "IT",
+      "latitude": 43.469299,
+      "longitude": 11.041124,
+      "main_photo": "https://static.cupid.travel/hotels/385113478.jpg",
+      "review_summary": {
+        "overall_score": 9.5,
+        "total_reviews": 472,
+        "highlights": [
+          {"score": 10, "guest": "Claudio (Switzerland)", "type": "Couples", "headline": "Perfekt - Stefano is a super host, covered parking is priceless"},
+          {"score": 10, "guest": "Andrew (USA)", "type": "Solo", "headline": "Wonderful stay while walking via Francigena"},
+          {"score": 10, "guest": "Stefania (Italy)", "type": "Couples", "headline": "Eccellente - top choice at unbeatable price for the area"}
+        ],
+        "what_guests_love": [
+          {"theme": "Location", "quote": "Right in the center of San Gimignano - perfectly accessible to everything"},
+          {"theme": "Host", "quote": "Stefano is very attentive, friendly and offers welcome cocktail at local bar"},
+          {"theme": "Value", "quote": "Top choice with unbeatable price for the area"},
+          {"theme": "Kitchen", "quote": "Shared kitchen with coffee, tea, biscuits provided - can prepare own breakfast"},
+          {"theme": "Parking", "quote": "Covered parking is priceless in San Gimignano"}
+        ],
+        "what_to_know": [
+          {"concern": "Compact Rooms", "quote": "Rooms are small but have everything you need"},
+          {"concern": "Heating", "quote": "One guest noted feeling a bit cold"},
+          {"concern": "Self-Catering Breakfast", "quote": "No served breakfast - use shared kitchen with provided basics"}
+        ],
+        "guest_types": "Mostly couples and solo travelers from Switzerland, Italy, Spain, Mexico. Perfect for independent travelers wanting central location at great value."
+      }
+    },
+    {
+      "id": "lp80521",
+      "name": "Spa Resort Fonte Alla Lepre",
+      "stars": 4,
+      "rating": 8.6,
+      "rating_count": 896,
+      "address": "Val di Lopia",
+      "city": "Riparbella",
+      "country": "IT",
+      "latitude": 43.35372,
+      "longitude": 10.651096,
+      "main_photo": "https://static.cupid.travel/hotels/46010556.jpg",
+      "review_summary": {
+        "overall_score": 8.6,
+        "total_reviews": 896,
+        "highlights": [
+          {"score": 10, "guest": "Kiki (Greece)", "type": "Group", "headline": "Magical place with very kind and friendly staff"},
+          {"score": 10, "guest": "Heike (Germany)", "type": "Couples", "headline": "Dreamlike vacation - wonderful starting point to see many places"}
+        ],
+        "what_guests_love": [
+          {"theme": "Location", "quote": "Exceptional and magnificent location - perfect base to explore Tuscany"},
+          {"theme": "Spa & Pool", "quote": "The spa and pool are extra - wonderful terrace views"},
+          {"theme": "Food", "quote": "Excellent food, fresh and abundant breakfast"},
+          {"theme": "Staff", "quote": "Extraordinary personnel who pamper you, especially in quieter seasons"},
+          {"theme": "Tranquility", "quote": "The peace and dreamlike view from the terrace"}
+        ],
+        "what_to_know": [
+          {"concern": "Breakfast Variety", "quote": "Breakfast buffet was nearly identical over 7 days - could use more variety"},
+          {"concern": "Mattresses", "quote": "Mattresses not very comfortable for some guests"},
+          {"concern": "Hot Water", "quote": "Hot water takes a while to arrive - plumbing needs attention"},
+          {"concern": "No Coffee Machine", "quote": "Missing proper coffee machine in the apartment"}
+        ],
+        "guest_types": "Mostly couples and families from Germany, Greece, Italy, Belgium. Ideal for those seeking spa retreat in rural Tuscany."
+      }
+    },
+    {
+      "id": "lp657765d5",
+      "name": "Terra d'Ombra Bed&Breakfast",
+      "stars": 0,
+      "rating": 9.6,
+      "rating_count": 329,
+      "address": "Via Piandornella 13 primo piano",
+      "city": "San Gimignano",
+      "country": "IT",
+      "latitude": 43.466865,
+      "longitude": 11.044917,
+      "main_photo": "https://static.cupid.travel/hotels/444845089.jpg",
+      "review_summary": {
+        "overall_score": 9.6,
+        "total_reviews": 329,
+        "highlights": [
+          {"score": 10, "guest": "Eirini (Greece)", "type": "Solo", "headline": "Perfect - cosy room, try the restaurant with amazing view"},
+          {"score": 10, "guest": "Tim (UK)", "type": "Couples", "headline": "Breakfast on the terrace was amazing - the view, service and food"},
+          {"score": 10, "guest": "Maria Lorena (Italy)", "type": "Couples", "headline": "Tornero sicuramente - fell in love with the surrounding landscape"}
+        ],
+        "what_guests_love": [
+          {"theme": "Views", "quote": "Impressive views - I fell in love with the landscape around me"},
+          {"theme": "Breakfast", "quote": "Breakfast on the terrace was amazing - the view, the service and the food"},
+          {"theme": "Host", "quote": "Lorenzo's welcome was wonderful - very friendly staff"},
+          {"theme": "Cleanliness", "quote": "Clean, quiet room with everything you need"},
+          {"theme": "Restaurant", "quote": "Try the on-site restaurant - nice food and amazing view"}
+        ],
+        "what_to_know": [
+          {"concern": "Small Bathroom", "quote": "Bathroom is tiny without bidet - replaced by practical hand shower"},
+          {"concern": "Mirror Height", "quote": "Mirror is positioned very high - perhaps designed for basketball players"}
+        ],
+        "guest_types": "Mostly couples from UK, Greece, Italy, Germany. Perfect for those seeking terrace views and proximity to San Gimignano center."
+      }
+    }
+  ],
+  "total_hotels": 10,
+  "generated_at": "2025-12-28T23:45:00Z"
+}

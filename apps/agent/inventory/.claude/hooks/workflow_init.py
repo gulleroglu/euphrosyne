@@ -108,7 +108,7 @@ def analyze_existing_workflow(occasion_id: str) -> tuple:
             return None, None
 
         # Check what step we're on by examining context files
-        acc_context = context_dir / "accommodations.json"
+        acc_context = context_dir / "accommodation.json"
         act_context = context_dir / "activities.json"
 
         acc_exists = acc_context.exists()
@@ -170,7 +170,7 @@ if status == "resume_activities":
     occasion_name = occasion_context.get("occasion", "occasion") if occasion_context else "occasion"
 
     print(f"Resuming workflow for {occasion_name}.")
-    print(f"Accommodation step already complete (files/context/accommodations.json exists).")
+    print(f"Accommodation step already complete (files/context/accommodation.json exists).")
     print(f"\nUse Skill tool to invoke 'orchestrating-workflow' skill with message:")
     print(f"'Resuming workflow. Accommodation complete, proceeding to activities.'")
     sys.exit(0)
@@ -212,12 +212,49 @@ occasion_context = {
     "end_date": occasion_data.get("end_date")
 }
 
-# Create process directory if needed
+# Create ALL directories upfront (subagents/skills should never create folders)
 process_dir.mkdir(parents=True, exist_ok=True)
+context_dir.mkdir(parents=True, exist_ok=True)
+(project_root / "files" / "content").mkdir(parents=True, exist_ok=True)
+(project_root / "files" / "content" / "accommodation").mkdir(parents=True, exist_ok=True)
+(project_root / "files" / "content" / "activities").mkdir(parents=True, exist_ok=True)
 
 # Save occasion context (orchestrate.py will handle execution_state.json)
 with open(occasion_context_file, 'w') as f:
     json.dump(occasion_context, f, indent=2)
+
+# Restore existing context files from Supabase if they exist
+# This allows resuming from where we left off
+accommodations_data = occasion_data.get("accommodations")
+activities_data = occasion_data.get("activities")
+
+if accommodations_data:
+    acc_context_file = context_dir / "accommodation.json"
+    with open(acc_context_file, 'w') as f:
+        json.dump(accommodations_data, f, indent=2)
+    print(f"Restored accommodation.json from Supabase ({len(accommodations_data.get('hotels', []))} hotels)")
+
+if activities_data:
+    act_context_file = context_dir / "activities.json"
+    with open(act_context_file, 'w') as f:
+        json.dump(activities_data, f, indent=2)
+    # Count places across categories
+    place_count = sum(len(cat.get('places', [])) for cat in activities_data.get('categories', []))
+    print(f"Restored activities.json from Supabase ({place_count} places)")
+
+# Determine workflow action based on what was restored
+if accommodations_data and activities_data:
+    # Both exist - workflow already complete, just verify
+    action = "resume"
+    action_msg = "Both accommodation and activities already exist. Verifying and updating Supabase."
+elif accommodations_data:
+    # Only accommodation - resume at activities
+    action = "resume"
+    action_msg = "Accommodation already exists. Resuming at activities step."
+else:
+    # Neither exists - fresh start
+    action = "init"
+    action_msg = "Starting fresh inventory workflow."
 
 # Build initialization message
 init_message = f"""Inventory workflow initialized for occasion.
@@ -227,6 +264,8 @@ Occasion Context:
 - Description: {occasion_context.get('description', 'No description')[:100]}...
 - Location: {occasion_context.get('city', 'Unknown')}, {occasion_context.get('country', 'Unknown')}
 - Dates: {occasion_context.get('start_date', 'TBD')} to {occasion_context.get('end_date', 'TBD')}
+
+Status: {action_msg}
 
 Use Skill tool to invoke 'orchestrating-workflow' skill with message:
 'Workflow initialized. Starting inventory sequence for {occasion_context.get('occasion', 'occasion')}.'"""

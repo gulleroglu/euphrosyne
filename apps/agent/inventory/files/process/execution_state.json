@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "workflow": {
+    "status": "completed",
+    "current_step": 1,
+    "next_agent": null,
+    "started_at": "2025-12-28T23:33:20.835930",
+    "occasion_id": "b3c9cb61-3771-4c36-a6a9-44abd1c1c060",
+    "workflow_complete": true
+  },
+  "history": [
+    {
+      "timestamp": "2025-12-28T23:33:20.839226",
+      "event": "workflow_initialized",
+      "details": {
+        "occasion_id": "b3c9cb61-3771-4c36-a6a9-44abd1c1c060",
+        "occasion": "Andrea Bocelli's Annual Concert in Teatro del Silenzio",
+        "city": "Lajatico, Tuscany",
+        "country": "Italy"
+      }
+    },
+    {
+      "timestamp": "2025-12-28T23:39:51.298206",
+      "event": "completed",
+      "agent": "accommodation",
+      "details": {
+        "claimed_count": 10,
+        "actual_count": 10,
+        "raw_file_count": 0,
+        "raw_item_count": 0,
+        "supabase_updated": true
+      }
+    },
+    {
+      "timestamp": "2025-12-28T23:59:59.326819",
+      "event": "completed",
+      "agent": "activities",
+      "details": {
+        "claimed_count": 47,
+        "actual_count": 34,
+        "raw_file_count": 0,
+        "raw_item_count": 0
+      }
+    },
+    {
+      "timestamp": "2025-12-29T00:00:02.683219",
+      "event": "workflow_completed",
+      "details": {
+        "accommodations_count": 10,
+        "activities_count": 34,
+        "activities_categories": 9,
+        "supabase_updated": true,
+        "supabase_message": "Supabase updated successfully"
+      }
+    }
+  ],
+  "metadata": {
+    "last_updated": "2025-12-29T00:00:02.683236"
+  }
+}

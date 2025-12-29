@@ -5,7 +5,7 @@ description: Workflow orchestrator and dispatcher between inventory subagents. V
 
 # Orchestrating Workflow - Inventory Agent
 
-You act as a **workflow orchestrator** between subagents for building exhaustive masterlists. When invoked:
+You act as a **workflow orchestrator** between subagents for building curated masterlists. When invoked:
 
 1. **Read the instructions** passed to the skill from the previous subagent (accommodation or activities)
 2. **Parse the message** to extract parameters:
@@ -17,8 +17,6 @@ You act as a **workflow orchestrator** between subagents for building exhaustive
    - **If validation passes**: Proceed to next subagent or complete workflow
    - **If validation fails**: Retry the same subagent with warning about what went wrong
 5. **CRITICAL** Relay and enforce what to do next
-
-**MANDATORY - READ ENTIRE FILE: `references/validation_and_errors.md` completely from start to finish before any operation.**
 
 Check [Workflow Selection](#workflow-selection) for more details per specific handover from a subagent.
 
@@ -53,62 +51,192 @@ Resuming workflow at accommodation step.
 **Action:**
 1. Call `python3 scripts/orchestrate.py --agent resume`
 2. Script checks context files to determine where to resume:
-   - If `accommodations.json` exists but `activities.json` doesn't → resume at activities
+   - If `accommodation.json` exists but `activities.json` doesn't → resume at activities
    - If neither exists → resume at accommodation
    - If both exist → complete workflow with Supabase update
 3. Follow script output for which subagent to invoke next
 
 #### Workflow 2: After Accommodation Subagent
 ```
-Accommodation research complete. Found 45 accommodations.
+Accommodation research complete. Found 10 hotels matching criteria.
 ```
 
-**MANDATORY - READ ENTIRE FILE: `references/post-accommodation.md` completely from start to finish.**
-
 **Action:**
-1. Parse count from message (e.g., "45")
-2. Call `python3 scripts/orchestrate.py --agent accommodation --accommodation-count 45`
-3. Script validates:
-   - files/context/accommodations.json exists
-   - File contains array with id, source, name fields
-   - Cross-checks claimed count vs actual count
-4. Invoke **activities** subagent with prompt from script output
+1. Parse count from message (e.g., "10")
+2. Call `python3 scripts/orchestrate.py --agent accommodation --accommodation-count 10`
+3. Script validates context file and returns next action
+4. Invoke **activities** subagent with occasion context from script output
 
 #### Workflow 3: After Activities Subagent (FINAL)
 ```
-Activities research complete. Found 120 activities.
+Activities research complete. Found 45 places across 5 categories.
 ```
 
-**MANDATORY - READ ENTIRE FILE: `references/post-activities.md` completely from start to finish.**
-
 **Action:**
-1. Parse count from message (e.g., "120")
-2. Call `python3 scripts/orchestrate.py --agent activities --activities-count 120`
-3. Script validates:
-   - files/context/activities.json exists
-   - files/context/accommodations.json still exists
-   - Compiles results and updates Supabase
+1. Parse count from message (e.g., "45")
+2. Call `python3 scripts/orchestrate.py --agent activities --activities-count 45`
+3. Script validates context files and updates Supabase
 4. Workflow complete!
 
 ---
 
-## Two-Folder Architecture
+## Context File Structures
 
-The system uses **two separate output directories** for different purposes:
+### accommodation.json
 
-**1. files/content/ (Raw API Outputs)**
-- `accommodations/*.json` - Raw hotel data from Duffel and Google Maps
-- `activities/*.json` - Raw place data from Google Maps (one file per category)
-- Contains ALL results from API calls
-- Used for debugging and full data access
+```json
+{
+  "occasion_description": "Anniversary celebration in Champagne region",
+  "search_location": {
+    "type": "coordinates",
+    "latitude": 49.0422,
+    "longitude": 3.9530,
+    "city": "Epernay",
+    "country": "FR",
+    "radius_km": 25
+  },
+  "search_criteria": {
+    "min_rating": 8.0,
+    "min_reviews": 100
+  },
+  "hotels": [
+    {
+      "id": "lp55143",
+      "name": "Hotel Hermitage",
+      "stars": 5,
+      "rating": 9.2,
+      "rating_count": 1847,
+      "address": "Square Beaumarchais",
+      "city": "Epernay",
+      "country": "FR",
+      "latitude": 49.0422,
+      "longitude": 3.9530,
+      "main_photo": "https://...",
+      "review_summary": {
+        "overall_score": 9.2,
+        "total_reviews": 1847,
+        "highlights": [...],
+        "what_guests_love": [...],
+        "what_to_know": [...],
+        "guest_types": "..."
+      }
+    }
+  ],
+  "total_hotels": 10,
+  "generated_at": "2025-12-28T20:30:00Z"
+}
+```
 
-**2. files/context/ (Curated Lists for Supabase)**
-- `accommodations.json` - Deduplicated, validated array of accommodations
-- `activities.json` - Deduplicated, validated array of activities
-- **Source of truth** for Supabase update
-- Must have required fields: `id`, `source`, `name`
+### activities.json
 
-**Why two folders?** Raw API data (content) vs curated masterlists (context) separated.
+```json
+{
+  "occasion": {
+    "name": "Anniversary of Avenue de Champagne",
+    "description": "...",
+    "dates": "December 15-18, 2026",
+    "season": "winter"
+  },
+  "location": {
+    "primary": "Avenue de Champagne, Epernay",
+    "city": "Epernay",
+    "country": "FR",
+    "region": "Champagne"
+  },
+  "research_insights": {
+    "region_identity": "Heart of Champagne production...",
+    "unique_experiences": ["Cellar tours", "Tastings"],
+    "seasonal_considerations": "December is off-season...",
+    "excluded_activities": ["Cycling tours"],
+    "exclusion_reasoning": "Cold weather..."
+  },
+  "categories": [
+    {
+      "name": "Champagne Houses & Tastings",
+      "relevance": "Core to region's identity",
+      "search_queries": ["champagne house", "champagne tasting"],
+      "places": [
+        {
+          "id": "ChIJ...",
+          "name": "Moët & Chandon",
+          "rating": 4.6,
+          "rating_count": 5420,
+          "address": "20 Avenue de Champagne",
+          "latitude": 49.0422,
+          "longitude": 3.9530,
+          "why_included": "Most famous champagne house",
+          "review_summary": {
+            "what_guests_love": [...],
+            "negatives": [...],
+            "practical_tips": [...],
+            "best_for": "...",
+            "skip_if": "..."
+          }
+        }
+      ]
+    }
+  ],
+  "total_places": 45,
+  "generated_at": "2025-12-28T21:00:00Z"
+}
+```
+
+---
+
+## Validation Requirements
+
+### Accommodation Validation
+
+1. **File exists**: `files/context/accommodation.json` must exist
+2. **Structure**: Must be object with `hotels` array
+3. **Required fields per hotel**: `id`, `name`, `rating`
+4. **Review summary**: Each hotel must have `review_summary`
+
+### Activities Validation
+
+1. **File exists**: `files/context/activities.json` must exist
+2. **Structure**: Must be object with `categories` array
+3. **Research insights**: Must have `research_insights` section
+4. **Required fields per category**: `name`, `relevance`, `places`
+5. **Required fields per place**: `id`, `name`
+6. **Review summary**: Each place must have `review_summary`
+
+---
+
+## Subagent Sequence
+
+```
+                        ┌──────────────────┐
+                        │  init OR resume  │
+                        └────────┬─────────┘
+                                 │
+                                 ▼
+1. accommodation subagent  →  (follows its own instructions)
+       │
+       ▼
+   [orchestrator validates context/accommodation.json]
+       │
+       ▼
+2. activities subagent     →  (follows its own instructions)
+       │
+       ▼
+   [orchestrator validates context/activities.json]
+       │
+       ▼
+   [Supabase UPDATE occasions SET accommodations=..., activities=...]
+       │
+       ▼
+   COMPLETE
+```
+
+**Resume Logic:**
+- If `accommodation.json` exists but `activities.json` doesn't → skip to activities
+- If neither exists → start at accommodation
+- If both exist → just run Supabase update and complete
+
+**Separation of Concerns:**
+- Orchestrator: validates outputs, routes to next step, passes occasion context
+- Subagents: follow their own instructions in `.claude/agents/*.md`
 
 ---
 
@@ -122,10 +250,10 @@ python3 scripts/orchestrate.py --agent init
 python3 scripts/orchestrate.py --agent resume
 
 # After accommodation subagent
-python3 scripts/orchestrate.py --agent accommodation --accommodation-count 45
+python3 scripts/orchestrate.py --agent accommodation --accommodation-count 10
 
 # After activities subagent (triggers Supabase update)
-python3 scripts/orchestrate.py --agent activities --activities-count 120
+python3 scripts/orchestrate.py --agent activities --activities-count 45
 
 # Check status
 python3 scripts/orchestrate.py --agent status
@@ -133,71 +261,11 @@ python3 scripts/orchestrate.py --agent status
 
 The script will:
 1. Validate context files exist with proper structure
-2. Cross-check agent claims vs actual file contents
-3. Update execution_state.json with history (audit trail)
-4. On final step: Update Supabase occasions table
-5. Return next action instructions
-
----
-
-## Validation Requirements
-
-### Context File Structure
-
-Each item in context files must have:
-
-```json
-{
-  "id": "place_abc123",
-  "source": "google_maps",
-  "name": "Hotel Example",
-  ...
-}
-```
-
-### Validation Checks
-
-1. **File exists**: `files/context/{type}.json` must exist
-2. **Valid JSON array**: File must contain `[...]` not `{...}`
-3. **Required fields**: Each item must have `id`, `source`, `name`
-4. **Count validation**: Claimed count should match actual count
-
----
-
-## Subagent Sequence
-
-```
-                        ┌──────────────────┐
-                        │  init OR resume  │
-                        └────────┬─────────┘
-                                 │
-        ┌────────────────────────┴────────────────────────┐
-        │ (resume checks context files to determine point)│
-        └────────────────────────┬────────────────────────┘
-                                 │
-                                 ▼
-1. accommodation  →  Search all hotels (Duffel + Google Maps)
-       │
-       ▼
-   [validation: context/accommodations.json exists]
-       │
-       ▼
-2. activities     →  Search all places (Google Maps)
-       │
-       ▼
-   [validation: context/activities.json exists]
-       │
-       ▼
-   [Supabase UPDATE occasions SET accommodations=..., activities=...]
-       │
-       ▼
-   COMPLETE
-```
-
-**Resume Logic:**
-- If `accommodations.json` exists but `activities.json` doesn't → skip to activities
-- If neither exists → start at accommodation
-- If both exist → just run Supabase update and complete
+2. Validate each item has `review_summary`
+3. Cross-check agent claims vs actual file contents
+4. Update execution_state.json with history (audit trail)
+5. On final step: Update Supabase occasions table
+6. Return next action instructions
 
 ---
 
@@ -212,18 +280,18 @@ When validation fails, the script exits with error code 1 and prints diagnostic 
 
 Example validation failure:
 ```
-❌ VALIDATION ERROR: Context file not found: files/context/accommodations.json
-   Accommodation subagent must write curated list to files/context/accommodations.json
+❌ VALIDATION ERROR: Hotel 0 (Hotel Example) missing review_summary
+   Accommodation subagent must write curated list to files/context/accommodation.json
 
-⚠️  RETRY: Re-run accommodation subagent with warning about missing context file
+⚠️  RETRY: Re-run accommodation subagent with warning about missing review_summary
 ```
 
 **Response:**
 ```
 Re-invoke accommodation subagent with warning:
 
-⚠️ Previous attempt failed validation. You MUST write the curated list to files/context/accommodations.json.
+⚠️ Previous attempt failed validation. Each hotel MUST have review_summary with analyzed reviews.
 
-Build exhaustive masterlist of accommodations...
+Find suitable accommodations...
 [rest of prompt]
 ```
